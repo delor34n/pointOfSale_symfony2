@@ -5,12 +5,12 @@ namespace Jmena\VentasBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Marca
+ * Categoria
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class Marca
+class Categoria
 {
     /**
      * @var integer
@@ -43,7 +43,7 @@ class Marca
      * Set descripcion
      *
      * @param string $descripcion
-     * @return Marca
+     * @return Categoria
      */
     public function setDescripcion($descripcion)
     {
