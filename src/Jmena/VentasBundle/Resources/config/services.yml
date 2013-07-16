@@ -1,0 +1,7 @@
+parameters:
+#    jmena_ventas.example.class: Jmena\VentasBundle\Example
+
+services:
+#    jmena_ventas.example:
+#        class: %jmena_ventas.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,3 @@
+jmena_ventas:
+    resource: "@JmenaVentasBundle/Resources/config/routing.yml"
+    prefix:   /
