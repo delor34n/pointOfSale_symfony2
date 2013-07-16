@@ -1,15 +1,28 @@
 _home:
     path:  /
     defaults: { _controller: JmenaVentasBundle:Default:index }
+
+_stock:
+    path: /producto/stock
+    defaults: { _controller: JmenaVentasBundle:Producto:stock }
+
 _producto:
     path: /producto
     defaults: { _controller: JmenaVentasBundle:Producto:index }
-_newproducto:
+_newProducto:
     path: /producto/new
-    defaults: { _controller: JmenaVentasBundle:Producto:new }
+    defaults: { _controller: JmenaVentasBundle:Producto:create }
+
 _categoria:
     path: /categoria
     defaults: { _controller: JmenaVentasBundle:Categoria:index }
+_newCategoria:
+    path: /categoria/new
+    defaults: { _controller: JmenaVentasBundle:Categoria:create }
+
 _marca:
     path: /marca
     defaults: { _controller: JmenaVentasBundle:Marca:index }
+_newMarca:
+    path: /marca/new
+    defaults: { _controller: JmenaVentasBundle:Marca:create }

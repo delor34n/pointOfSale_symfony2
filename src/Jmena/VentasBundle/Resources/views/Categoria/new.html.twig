@@ -1,20 +1,22 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Categoria creation</h1>
+{% block title%}
+    Nueva Categoria
+    {{ parent() }}
+{% endblock%}
 
+{% block body -%}
+    <h2>Nueva Categoria</h2>
+    </br>
     <form action="{{ path('categoria_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
+        {{ form_rest(form) }}
         <p>
-            <button type="submit">Create</button>
+            </br>
+            <button class="btn btn-primary btn-large" type="submit">INGRESAR</button>
         </p>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('categoria') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a href="{{ path('categoria') }}">
+        <i class="icon-chevron-left"></i>VOLVER
+    </a>
 {% endblock %}

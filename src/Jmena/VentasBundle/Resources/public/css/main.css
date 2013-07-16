@@ -1,0 +1,33 @@
+body {
+	padding-top: 60px;
+	padding-bottom: 40px;
+}
+
+.new {
+	float: right;
+	margin-top: -54px;
+}
+
+.del {
+	margin-right: 130px;
+}
+
+/***************
+	COLORES
+****************/
+
+#titulo {
+	color: lightgreen;
+}
+
+#venta {
+	color: red;
+}
+
+#stock {
+	color:yellow;
+}
+
+#inventario {
+	color: blue;
+}

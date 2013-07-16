@@ -35,6 +35,25 @@ class ProductoController extends Controller
             'entities' => $entities,
         );
     }
+
+    /**
+     * Lists all Producto stock.
+     *
+     * @Route("/stock", name="producto_stock")
+     * @Method("GET")
+     * @Template("JmenaVentasBundle:Producto:stock.html.twig")
+     */
+    public function stockAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('JmenaVentasBundle:Producto')->findAll();
+
+        return array(
+            'entities' => $entities,
+        );
+    }
+
     /**
      * Creates a new Producto entity.
      *

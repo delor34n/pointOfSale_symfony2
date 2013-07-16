@@ -21,15 +21,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="brand" href=" {{ path ( '_home' ) }} ">Julio Mena Stock</a>
+                    <a id="titulo" class="brand" href=" {{ path ( '_home' ) }} ">Julio Mena Stock</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="{% block active_home %} {% endblock %}"><a href=" {{ path ( '_home' ) }} ">Home</a></li>
-                            <li class="dropdown {% block active_pacientes %} {% endblock %}">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pacientes<b class="caret"></b></a>
+                            <li class="{% block active_venta %} {% endblock %}"><a id="venta" href=" {{ path ( '_home' ) }} ">VENTA</a></li>
+                            <li class="{% block active_stock %} {% endblock %}"><a id="stock" href=" {{ path ( '_stock' ) }} ">STOCK</a></li>
+                            <li class="dropdown {% block active_inventario %} {% endblock %}">
+                                <a id="inventario" href="#" class="dropdown-toggle" data-toggle="dropdown">INVENTARIO<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href=" {{ path ( '_producto' ) }} ">Listar Paciente</a></li>
-                                    <li><a href=" {{ path ( '_newproducto' ) }} ">Nuevo Paciente</a></li>
+                                    <li><a href=" {{ path ( '_producto' ) }} ">PRODUCTOS</a></li>
+                                    <li><a href=" {{ path ( '_categoria' ) }} ">CATEGORIAS</a></li>
+                                    <li><a href=" {{ path ( '_marca' ) }} ">MARCAS</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -38,7 +40,7 @@
             </div><!--/.navbar-inner -->
         </div><!--/.navbar navbar-inverse navbar-fixed-top -->
         <div class="container">
-            {% block body %}{% endblock %}
+                {% block body %}{% endblock %}
         </div>
     </body>
 </html>

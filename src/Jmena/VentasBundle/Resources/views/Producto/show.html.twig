@@ -1,16 +1,29 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Producto</h1>
+{% block title%}
+    Detalle Producto
+    {{ parent() }}
+{% endblock%}
 
-    <table class="record_properties">
+{% block body -%}
+    <h2>Detalle Producto</h2>
+    <a class="new btn btn-primary btn-large" href="{{ path('producto_edit', { 'id': entity.id }) }}">
+            <i class="icon-edit"></i> EDITAR
+    </a>
+    <form class="new del" action="{{ path('producto_delete', { 'id': entity.id }) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_widget(delete_form) }}
+        <button class="btn btn-danger btn-large" type="submit"><i class="icon-remove"></i> ELIMINAR</button>
+    </form>
+    </br>
+    <table class="table table-bordered">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>Código</th>
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <td>{{ entity.descripcion }}</td>
             </tr>
             <tr>
@@ -18,37 +31,20 @@
                 <td>{{ entity.stock }}</td>
             </tr>
             <tr>
-                <th>Valor</th>
-                <td>{{ entity.valor }}</td>
-            </tr>
-            <tr>
                 <th>Alarma</th>
                 <td>{{ entity.alarma }}</td>
             </tr>
             <tr>
-                <th>Rutaimagen</th>
+                <th>Valor</th>
+                <td>{{ entity.valor }}</td>
+            </tr>
+            <tr>
+                <th>Ruta imagen</th>
                 <td>{{ entity.rutaImagen }}</td>
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('producto') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('producto_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('producto_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    <a href="{{ path('producto') }}">
+        <i class="icon-chevron-left"></i>VOLVER
+    </a>
 {% endblock %}

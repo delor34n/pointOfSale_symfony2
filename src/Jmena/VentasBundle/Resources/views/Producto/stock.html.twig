@@ -1,13 +1,12 @@
 {% extends '::base.html.twig' %}
 
 {% block title%}
-    Listado de Productos
+    Stock de productos
     {{ parent() }}
 {% endblock%}
 
 {% block body -%}
-    <h2>Listado de Productos</h2>
-    <a class="new btn btn-primary btn-large" href="{{ path('producto_new') }}">NUEVO PRODUCTO</a>
+    <h2>Stock de productos</h2>
     </br>
     <table class="table table-bordered">
         <thead>
@@ -16,25 +15,19 @@
                 <th>Descripción</th>
                 <th>Stock</th>
                 <th>Alarma</th>
-                <th>Valor</th>                
-                <th>Imagen</th>
-                <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
+            {% if entity.stock < entity.alarma %}
+                <tr class="error">
+            {% else %}
+                <tr>
+            {% endif %}
                 <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>
-                <td>{{ entity.valor }}</td>                
-                <td>{{ entity.rutaimagen }}</td>
-                <td>
-                    <a href="{{ path('producto_show', { 'id': entity.id }) }}">
-                        <i class="icon-eye-open"></i> IR
-                    </a>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

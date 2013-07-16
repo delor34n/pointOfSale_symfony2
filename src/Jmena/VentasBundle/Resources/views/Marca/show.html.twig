@@ -1,9 +1,22 @@
 {% extends '::base.html.twig' %}
 
-{% block body -%}
-    <h1>Marca</h1>
+{% block title%}
+    Detalle Marca
+    {{ parent() }}
+{% endblock%}
 
-    <table class="record_properties">
+{% block body -%}
+    <h2>Marca</h2>
+    <a class="new btn btn-primary btn-large" href="{{ path('marca_edit', { 'id': entity.id }) }}">
+            <i class="icon-edit"></i> EDITAR
+    </a>
+    <form class="new del" action="{{ path('marca_delete', { 'id': entity.id }) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_rest(delete_form) }}
+        <button class="btn btn-danger btn-large" type="submit"><i class="icon-remove"></i> ELIMINAR</button>
+    </form>
+    </br>
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -15,24 +28,7 @@
             </tr>
         </tbody>
     </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('marca') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('marca_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>
-        <form action="{{ path('marca_delete', { 'id': entity.id }) }}" method="post">
-            <input type="hidden" name="_method" value="DELETE" />
-            {{ form_widget(delete_form) }}
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-</ul>
+    <a href="{{ path('marca') }}">
+        <i class="icon-chevron-left"></i>VOLVER
+    </a>
 {% endblock %}

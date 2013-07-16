@@ -1,20 +1,21 @@
 {% extends '::base.html.twig' %}
 
+{% block title%}
+    Nueva Marca
+    {{ parent() }}
+{% endblock%}
+
 {% block body -%}
-    <h1>Marca creation</h1>
+    <h2>Nueva Marca</h2>
 
     <form action="{{ path('marca_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_widget(form) }}
+        {{ form_rest(form) }}
         <p>
-            <button type="submit">Create</button>
+            <button class="btn btn-primary" type="submit">INGRESAR</button>
         </p>
     </form>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('marca') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a href="{{ path('categoria') }}">
+        <i class="icon-chevron-left"></i>VOLVER
+    </a>
 {% endblock %}
