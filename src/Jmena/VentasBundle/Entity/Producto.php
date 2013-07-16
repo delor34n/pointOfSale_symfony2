@@ -10,8 +10,20 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Producto
-{
+class Producto {
+
+    /**
+    * @ORM\ManyToOne(targetEntity="Categoria", inversedBy="productos")
+    * @ORM\JoinColumn(name="id_categoria", referencedColumnName="id")
+    */
+    protected $categoria;
+
+    /**
+    * @ORM\ManyToOne(targetEntity="Marca", inversedBy="productos")
+    * @ORM\JoinColumn(name="id_marca", referencedColumnName="id")
+    */
+    protected $marca;
+
     /**
      * @var integer
      *
@@ -180,5 +192,51 @@ class Producto
     public function getRutaImagen()
     {
         return $this->rutaImagen;
+    }
+
+    /**
+     * Set categoria
+     *
+     * @param \Jmena\VentasBundle\Entity\Categoria $categoria
+     * @return Producto
+     */
+    public function setCategoria(\Jmena\VentasBundle\Entity\Categoria $categoria = null)
+    {
+        $this->categoria = $categoria;
+    
+        return $this;
+    }
+
+    /**
+     * Get categoria
+     *
+     * @return \Jmena\VentasBundle\Entity\Categoria 
+     */
+    public function getCategoria()
+    {
+        return $this->categoria;
+    }
+
+    /**
+     * Set marca
+     *
+     * @param \Jmena\VentasBundle\Entity\Marca $marca
+     * @return Producto
+     */
+    public function setMarca(\Jmena\VentasBundle\Entity\Marca $marca = null)
+    {
+        $this->marca = $marca;
+    
+        return $this;
+    }
+
+    /**
+     * Get marca
+     *
+     * @return \Jmena\VentasBundle\Entity\Marca 
+     */
+    public function getMarca()
+    {
+        return $this->marca;
     }
 }

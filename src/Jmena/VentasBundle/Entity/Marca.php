@@ -3,6 +3,7 @@
 namespace Jmena\VentasBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Marca
@@ -10,8 +11,13 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Marca
-{
+class Marca {
+
+    /**
+    * @ORM\OneToMany(targetEntity="Producto", mappedBy="marca")
+    */
+    protected $productos;
+
     /**
      * @var integer
      *
@@ -28,6 +34,15 @@ class Marca
      */
     private $descripcion;
 
+    /*
+        The code in the __construct() method is important because Doctrine requires the $products
+        property to be an ArrayCollection object. This object looks and acts almost exactly like an array,
+        but has some added flexibility. If this makes you uncomfortable, don't worry. Just imagine that it's
+        an array and you'll be in good shape.
+    */
+    public function __construct() {
+        $this->productos = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,5 +75,38 @@ class Marca
     public function getDescripcion()
     {
         return $this->descripcion;
+    }
+
+    /**
+     * Add productos
+     *
+     * @param \Jmena\VentasBundle\Entity\Producto $productos
+     * @return Marca
+     */
+    public function addProducto(\Jmena\VentasBundle\Entity\Producto $productos)
+    {
+        $this->productos[] = $productos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param \Jmena\VentasBundle\Entity\Producto $productos
+     */
+    public function removeProducto(\Jmena\VentasBundle\Entity\Producto $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
     }
 }
