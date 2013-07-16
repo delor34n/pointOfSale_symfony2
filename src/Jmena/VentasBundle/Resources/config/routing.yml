@@ -1,3 +1,12 @@
-jmena_ventas_homepage:
-    pattern:  /hello/{name}
+_home:
+    path:  /
     defaults: { _controller: JmenaVentasBundle:Default:index }
+_producto:
+    path: /producto
+    defaults: { _controller: JmenaVentasBundle:Producto:index }
+_categoria:
+    path: /categoria
+    defaults: { _controller: JmenaVentasBundle:Categoria:index }
+_marca:
+    path: /marca
+    defaults: { _controller: JmenaVentasBundle:Marca:index }

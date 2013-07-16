@@ -109,4 +109,8 @@ class Marca {
     {
         return $this->productos;
     }
+
+    public function __toString() {
+        return $this->getDescripcion();
+    }
 }

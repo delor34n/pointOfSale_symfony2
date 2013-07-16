@@ -1,3 +1,7 @@
 jmena_ventas:
     resource: "@JmenaVentasBundle/Resources/config/routing.yml"
     prefix:   /
+jmena_producto:
+    resource: "@JmenaVentasBundle/Controller/"
+    type: annotation
+    prefix: /
