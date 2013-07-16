@@ -4,6 +4,9 @@ _home:
 _producto:
     path: /producto
     defaults: { _controller: JmenaVentasBundle:Producto:index }
+_newproducto:
+    path: /producto/new
+    defaults: { _controller: JmenaVentasBundle:Producto:new }
 _categoria:
     path: /categoria
     defaults: { _controller: JmenaVentasBundle:Categoria:index }

@@ -2,12 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href=" {{ asset ( "favicon.ico" ) }} "/>
+        <title>{% block title %}| Julio Mena - Control de Stock {% endblock %}</title>
+        {% stylesheets 'bundles/jmenaventas/css/*' filter='cssrewrite' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% javascripts '@JmenaVentasBundle/Resources/public/js/*' %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="brand" href=" {{ path ( '_home' ) }} ">Julio Mena Stock</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="{% block active_home %} {% endblock %}"><a href=" {{ path ( '_home' ) }} ">Home</a></li>
+                            <li class="dropdown {% block active_pacientes %} {% endblock %}">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pacientes<b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href=" {{ path ( '_producto' ) }} ">Listar Paciente</a></li>
+                                    <li><a href=" {{ path ( '_newproducto' ) }} ">Nuevo Paciente</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div><!--/.container -->
+            </div><!--/.navbar-inner -->
+        </div><!--/.navbar navbar-inverse navbar-fixed-top -->
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
     </body>
 </html>
