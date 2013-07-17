@@ -16,20 +16,18 @@
                 <th>Descripción</th>
                 <th>Stock</th>
                 <th>Alarma</th>
-                <th>Valor</th>                
-                <th>Imagen</th>
+                <th>Valor</th>
                 <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.codigo }}</a></td>
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>
-                <td>{{ entity.valor }}</td>                
-                <td>{{ entity.rutaimagen }}</td>
+                <td>$ {{ entity.valor }}</td>
                 <td>
                     <a href="{{ path('producto_show', { 'id': entity.id }) }}">
                         <i class="icon-eye-open"></i> IR

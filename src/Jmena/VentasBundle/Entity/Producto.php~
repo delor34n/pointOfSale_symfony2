@@ -36,6 +36,13 @@ class Producto {
     /**
      * @var string
      *
+     * @ORM\Column(name="Codigo", type="string", length=255)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Descripcion", type="string", length=255)
      */
     private $descripcion;
@@ -215,5 +222,28 @@ class Producto {
     public function getCategoria()
     {
         return $this->categoria;
+    }
+
+    /**
+     * Set marca
+     *
+     * @param \Jmena\VentasBundle\Entity\Marca $marca
+     * @return Producto
+     */
+    public function setMarca(\Jmena\VentasBundle\Entity\Marca $marca = null)
+    {
+        $this->marca = $marca;
+    
+        return $this;
+    }
+
+    /**
+     * Get marca
+     *
+     * @return \Jmena\VentasBundle\Entity\Marca 
+     */
+    public function getMarca()
+    {
+        return $this->marca;
     }
 }

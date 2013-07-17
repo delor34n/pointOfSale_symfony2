@@ -109,4 +109,8 @@ class Categoria
     {
         return $this->productos;
     }
+
+    public function __toString() {
+        return $this->getDescripcion();
+    }
 }

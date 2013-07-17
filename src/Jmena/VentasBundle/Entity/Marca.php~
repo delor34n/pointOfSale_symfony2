@@ -76,4 +76,41 @@ class Marca {
     {
         return $this->descripcion;
     }
+
+    /**
+     * Add productos
+     *
+     * @param \Jmena\VentasBundle\Entity\Producto $productos
+     * @return Marca
+     */
+    public function addProducto(\Jmena\VentasBundle\Entity\Producto $productos)
+    {
+        $this->productos[] = $productos;
+    
+        return $this;
+    }
+
+    /**
+     * Remove productos
+     *
+     * @param \Jmena\VentasBundle\Entity\Producto $productos
+     */
+    public function removeProducto(\Jmena\VentasBundle\Entity\Producto $productos)
+    {
+        $this->productos->removeElement($productos);
+    }
+
+    /**
+     * Get productos
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProductos()
+    {
+        return $this->productos;
+    }
+
+    public function __toString() {
+        return $this->getDescripcion();
+    }
 }

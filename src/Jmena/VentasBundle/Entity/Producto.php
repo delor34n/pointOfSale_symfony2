@@ -36,6 +36,13 @@ class Producto {
     /**
      * @var string
      *
+     * @ORM\Column(name="Codigo", type="string", length=255)
+     */
+    private $codigo;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="Descripcion", type="string", length=255)
      */
     private $descripcion;
@@ -238,5 +245,28 @@ class Producto {
     public function getMarca()
     {
         return $this->marca;
+    }
+
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Producto
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
     }
 }
