@@ -113,7 +113,7 @@ class ProductoController extends Controller
         $entity = $em->getRepository('JmenaVentasBundle:Producto')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Producto entity.');
+            throw $this->createNotFoundException('No existe este producto.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
