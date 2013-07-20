@@ -17,7 +17,6 @@
                 <th>Stock</th>
                 <th>Alarma</th>
                 <th>Valor</th>
-                <th>Detalle</th>
             </tr>
         </thead>
         <tbody>
@@ -28,11 +27,6 @@
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>
                 <td>$ {{ entity.valor }}</td>
-                <td>
-                    <a href="{{ path('producto_show', { 'id': entity.id }) }}">
-                        <i class="icon-eye-open"></i> IR
-                    </a>
-                </td>
             </tr>
         {% endfor %}
         </tbody>

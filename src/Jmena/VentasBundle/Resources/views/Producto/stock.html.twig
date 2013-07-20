@@ -24,7 +24,7 @@
             {% else %}
                 <tr>
             {% endif %}
-                <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.codigo }}</a></td>
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>

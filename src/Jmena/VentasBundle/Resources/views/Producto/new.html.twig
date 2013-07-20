@@ -8,15 +8,28 @@
 {% block body -%}
     <h2>Nuevo Producto</h2>
     </br>
-    <form action="{{ path('producto_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_rest(form) }}
+    {{ form_start ( form ,  {'action': path('producto_create'), 'method': 'POST'}) }}
+        {{ form_row ( form.codigo ) }}
+        {{ form_row ( form.descripcion ) }}
+        {{ form_row ( form.stock ) }}
+        {{ form_row ( form.alarma ) }}
+        {{ form_label ( form.valor ) }}
+        <div class="control-group">
+            <div class="controls">
+            <div class="input-prepend">
+                <span class="add-on">$</span>
+                {{ form_widget ( form.valor ) }}
+            </div>
+        </div>
+        {{ form_row ( form.rutaImagen ) }}
+        {{ form_row ( form.categoria ) }}
+        {{ form_row ( form.marca ) }}
         <p>
             </br>
             <button class="btn btn-primary btn-large" type="submit">INGRESAR</button>
         </p>
-    </form>
-
-    <a href="{{ path('categoria') }}">
+    {{ form_end ( form ) }}
+    <a href="{{ path('producto') }}">
         <i class="icon-chevron-left"></i>VOLVER
     </a>
 {% endblock %}

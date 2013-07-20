@@ -176,7 +176,7 @@ class ProductoController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('producto_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('producto_show', array('id' => $entity->getId() ) ));
         }
 
         return array(
