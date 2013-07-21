@@ -24,10 +24,10 @@
                     <a id="titulo" class="brand" href=" {{ path ( '_home' ) }} ">Julio Mena Stock</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
-                            <li class="{% block active_venta %} {% endblock %}"><a id="venta" href=" {{ path ( '_home' ) }} ">VENTA</a></li>
-                            <li class="{% block active_stock %} {% endblock %}"><a id="stock" href=" {{ path ( '_stock' ) }} ">STOCK</a></li>
+                            <li class="{% block active_venta %} {% endblock %}"><a id="venta" href=" {{ path ( '_home' ) }} "><i class="icon-tags icon-white"></i> VENTA</a></li>
+                            <li class="{% block active_stock %} {% endblock %}"><a id="stock" href=" {{ path ( '_stock' ) }} "><i class="icon-hdd icon-white"></i> STOCK</a></li>
                             <li class="dropdown {% block active_inventario %} {% endblock %}">
-                                <a id="inventario" href="#" class="dropdown-toggle" data-toggle="dropdown">INVENTARIO<b class="caret"></b></a>
+                                <a id="inventario" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-bookmark icon-white"></i> INVENTARIO<b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href=" {{ path ( '_producto' ) }} ">PRODUCTOS</a></li>
                                     <li><a href=" {{ path ( '_categoria' ) }} ">CATEGORIAS</a></li>
