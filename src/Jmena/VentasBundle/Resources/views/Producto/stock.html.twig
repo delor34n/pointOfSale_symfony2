@@ -15,6 +15,7 @@
                 <th>Descripción</th>
                 <th>Stock</th>
                 <th>Alarma</th>
+                <th>Estado</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,11 @@
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>
+            {% if entity.stock < entity.alarma %}
+                <td> <span class="badge badge-important">Bajo Stock</span> </td>
+            {% else %}
+                <td> <span class="badge badge-success">Alto Stock</span> </td>
+            {% endif %}
             </tr>
         {% endfor %}
         </tbody>

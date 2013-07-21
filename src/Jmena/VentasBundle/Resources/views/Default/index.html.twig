@@ -7,4 +7,73 @@
 
 {% block body %}
 	<h2>Venta</h2>
+	</br>
+	<h4> Buscar producto </h4>
+	</br>
+	<form class="well form-search">
+		<input id="search" type="text" class="input-long ui-autocomplete-input">
+		<button class="btn btn-primary btn-large">
+			<i class="icon-search icon-white"></i>
+			BUSCAR
+		</button>
+	</form>
+	<table class="items table table-striped table-bordered table-condensed">
+		<thead>
+			<tr>
+				<th>Código</th>
+				<th>Descripción</th>
+				<th>Precio</th>
+				<th>Cantidad</th>
+				<th>Descuento %</th>
+				<th>Total</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="well pull-right extended-summary">
+		<h3>Total</h3>
+		<table class="table">
+			<tbody>
+				<tr>
+					<td class="detail-view table table-striped table-condensed">
+						<table>
+							<tbody>
+								<tr>
+									<th>Sub Total:</th>
+									<td class="textright">$ 1000</td>
+								</tr>
+								<tr>
+									<th>Descuentos:</th>
+									<td class="textright">$ 100</td>
+								</tr>
+									<th>Total:</th>
+									<td class="textright">$ 900</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td class="results sidebar-content" style="text-align:right" colspan="2">
+						<span id="total" class="btn btn-info btn-large disabled">
+							$ 900
+						</span>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 {% endblock %}

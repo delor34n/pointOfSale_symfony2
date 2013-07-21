@@ -12,8 +12,24 @@ body {
 	margin-right: 130px;
 }
 
+#search {
+	width: 400px;
+	height: 34px;
+	margin-right: 10px;
+}
+
 #jmena_ventasbundle_productotype_valor {
 	width: 100px;
+}
+
+.detail-view th {
+	text-align: right;
+	width: 160px;
+}
+
+#total {
+	margin-right: 65px;
+	margin-top:15px;
 }
 /***************
 	COLORES
