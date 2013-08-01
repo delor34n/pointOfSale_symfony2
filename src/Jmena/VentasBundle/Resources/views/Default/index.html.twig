@@ -4,12 +4,13 @@
     Venta
     {{ parent() }}
 {% endblock%}
-
+   
 {% block body %}
+	<div id="output"></div>
 	<h2>Venta</h2>
-	<form class="well form-search">
+	<form id="searchForm" class="well form-search" method="POST" action="{{path('_buscar')}}">
 		<input id="search" type="text" class="input-long ui-autocomplete-input">
-		<input type="submit" class="search-btn btn btn-primary btn-large">
+		<button class="search-btn btn btn-primary btn-large">
 			<i class="icon-search icon-white"></i>
 			BUSCAR
 		</button>
@@ -74,13 +75,4 @@
 			</tfoot>
 		</table>
 	</div>
-	<script>
-
-		$(document).ready(function() {
-  			$( .search-btn ).onsubmit ( function ( ){
-  				alert ( "hola" );
-  			});
-		});
-
-	</script>
 {% endblock %}

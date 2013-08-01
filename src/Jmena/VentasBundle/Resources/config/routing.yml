@@ -26,3 +26,9 @@ _marca:
 _newMarca:
     path: /marca/new
     defaults: { _controller: JmenaVentasBundle:Marca:create }
+
+_buscar:
+    path: /resultado
+    defaults: { _controller: JmenaVentasBundle:Default:buscarProducto }
+    requirements:
+        _method:  POST
