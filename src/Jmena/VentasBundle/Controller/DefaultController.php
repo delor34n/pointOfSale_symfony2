@@ -20,10 +20,10 @@ class DefaultController extends Controller
 		$request = $this -> get( 'request' );
 	   	$id = $request -> request -> get( 'searchID' );
    		$repository = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
+   		$producto = $repository -> findOneByCodigo( $id );
 
-   		if ( $id != "" ) { //Si no se ingreso el ID del producto
+   		if ( $producto != "" ) { //Si no se ingreso o el ID del producto no existe
 
-   			$producto = $repository -> findOneByCodigo( $id );
     		$return = array( 
     			"responseCode" => 200,
     			"descripcion" => $producto -> getDescripcion( ),
