@@ -1,43 +1,38 @@
 $ ( document ).ready( function ( ) {
 
-   //listen for the form beeing submitted
-   $( "#searchForm" ).submit( function ( ) {
+  //Limpiamos el campo de búsqueda de productos
+  $("#search").val('');
+  //Y posicionamos el cursor en el campo para llegar y pistolear el producto
+  $("#search").focus();
 
-      //get the url for the form
-      var url = $( "#searchForm" ).attr( "action" );
-   
-      //start send the post request
-       $.post( url , {
+  //En el momento en que el form sea ejecutado
+  $( "#searchForm" ).submit( function ( ) {
 
-           searchID: $( "#search" ).val( ),
-           other: "attributes"
+    //Obtenemos la ruta del action
+    var url = $( "#searchForm" ).attr( "action" );
 
-       }, function(data){
-           //the response is in the data variable
+    //Comenzamos a construir la petición POST
+    $.post( url , {
 
-            if ( data.responseCode == 200 ) {
+          searchID: $( "#search" ).val( ),
+          other: "attributes"
 
-                alert( "FUNCIONÓ" );
+    }, function(data){
+      //Aquí va la respuesta
 
-            } else if ( data.responseCode == 400 ) { //bad request
+        if ( data.responseCode == 200 ) {
 
-               alert( "TAMBIÉN FUNCIONÓ" );
+          alert( "FUNCIONÓ" );
+          $("#search").val('');
+          $("#search").focus();
+        } else if ( data.responseCode == 400 ) { //bad request
 
-              } else{
+          alert( "TAMBIÉN FUNCIONÓ" );
 
-                //if we got to this point we know that the controller
-                //did not return a json_encoded array. We can assume that           
-                //an unexpected PHP error occured
-                alert( "An unexpeded error occured." );
+        }
 
-                //if you want to print the error:
-                $( '#output' ).html( data );
+       });
 
-                }
-
-       });//It is silly. But you should not write 'json' or any thing as the fourth parameter. It should be undefined. I'll explain it futher down
-
-      //we dont what the browser to submit the form
       return false;
 
    });
