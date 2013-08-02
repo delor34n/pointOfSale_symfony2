@@ -13,7 +13,7 @@ $ ( document ).ready( function ( ) {
     var searchCode = $( "#search" ).val( );
 
     //Hay que validar si el producto ya se encuentra en venta, para aumentar su cantidad
-    if ( $("#elementos_"+searchCode).length == 0 ) {
+    if ( $("#elementos_"+searchCode).length == 0 ) { //No existe
 
       //Comenzamos a construir la petición POST
       $.post( url , {
@@ -25,8 +25,8 @@ $ ( document ).ready( function ( ) {
 
           if ( data.responseCode == 200 ) {
 
-            var cantidad = "<input id='cantidad' type='text' value='1' size='4px'></input>";
-            var descuento = "<input id='descuento' type='text' value='0%' size='4px'></input>";
+            var cantidad = "<input id='cantidad_"+searchCode+"' class='cantidad' type='text' value='1' size='4px'></input>";
+            var descuento = "<input id='descuento_"+searchCode+"' class='descuento' type='text' value='0%' size='4px'></input>";
 
             $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
             $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
@@ -41,7 +41,7 @@ $ ( document ).ready( function ( ) {
             $("#search").focus();
           } else if ( data.responseCode == 400 ) { //bad request
 
-            alert( "TAMBIÉN FUNCIONÓ" );
+            alert( "Producto no existe!" );
 
           }
 
@@ -50,6 +50,10 @@ $ ( document ).ready( function ( ) {
 
       //Aquí es donde solucionamos el problema de un elemento que se ingrese y sea duplicado.
       //Para esto debemos hacer que aumente la cantidad del mismo elemento... just that (:
+      var cantidad = parseInt ( $( "#cantidad_"+searchCode ).val( ) );
+      cantidad = cantidad + 1;
+      $( "#cantidad_"+searchCode ).val( cantidad );
+
     }
     return false;
   });

@@ -32,12 +32,12 @@ body {
 	margin-top:15px;
 }
 
-#cantidad {
+.cantidad {
 	width: 50px;
 	text-align: center;
 }
 
-#descuento {
+.descuento {
 	width: 50px;
 	text-align: center;
 }
