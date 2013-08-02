@@ -32,6 +32,15 @@ body {
 	margin-top:15px;
 }
 
+#cantidad {
+	width: 50px;
+	text-align: center;
+}
+
+#descuento {
+	width: 50px;
+	text-align: center;
+}
 /***************
 	COLORES
 ****************/

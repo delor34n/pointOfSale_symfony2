@@ -10,31 +10,47 @@ $ ( document ).ready( function ( ) {
 
     //Obtenemos la ruta del action
     var url = $( "#searchForm" ).attr( "action" );
+    var searchCode = $( "#search" ).val( );
 
-    //Comenzamos a construir la petición POST
-    $.post( url , {
+    //Hay que validar si el producto ya se encuentra en venta, para aumentar su cantidad
+    if ( $("#elementos_"+searchCode).length == 0 ) {
 
-          searchID: $( "#search" ).val( ),
-          other: "attributes"
+      //Comenzamos a construir la petición POST
+      $.post( url , {
 
-    }, function(data){
-      //Aquí va la respuesta
+            searchID: searchCode
 
-        if ( data.responseCode == 200 ) {
+      }, function(data){
+        //Aquí va la respuesta
 
-          alert( "FUNCIONÓ" );
-          $("#search").val('');
-          $("#search").focus();
-        } else if ( data.responseCode == 400 ) { //bad request
+          if ( data.responseCode == 200 ) {
 
-          alert( "TAMBIÉN FUNCIONÓ" );
+            var cantidad = "<input id='cantidad' type='text' value='1' size='4px'></input>";
+            var descuento = "<input id='descuento' type='text' value='0%' size='4px'></input>";
 
-        }
+            $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
+            $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+data.precio+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+descuento+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+data.precio+"</td>");
+            $("#elementos_"+searchCode).append("<td></td>");
 
-       });
+            $("#search").val('');
+            $("#search").focus();
+          } else if ( data.responseCode == 400 ) { //bad request
 
-      return false;
+            alert( "TAMBIÉN FUNCIONÓ" );
 
-   });
+          }
 
+      });
+    } else {
+
+      //Aquí es donde solucionamos el problema de un elemento que se ingrese y sea duplicado.
+      //Para esto debemos hacer que aumente la cantidad del mismo elemento... just that (:
+    }
+    return false;
+  });
 });
