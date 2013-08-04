@@ -14,11 +14,22 @@
 			<i class="icon-search icon-white"></i>
 			BUSCAR
 		</button>
+		<h5 id="atendido">Atendido por</h5>
+		<select id="vendedores">
+			{% for vendedor in vendedores %}
+
+			  <option value="{{vendedor.rut}}">{{vendedor.nombre}} {{vendedor.apellidoPa}} {{vendedor.apellidoMa}}</option>
+	 
+			{% endfor %}
+		</select>
 	</form>
+
 	<table class="items table table-striped table-bordered table-condensed">
 		<thead>
 			<tr>
 				<th>Código</th>
+				<th>Marca</th>
+				<th>Categoria</th>
 				<th>Descripción</th>
 				<th>Precio</th>
 				<th>Cantidad</th>
@@ -42,7 +53,7 @@
 									<td id="SUBTOTAL" class="textright">$ 0</td>
 								</tr>
 								<tr>
-									<th>Descuentos:</th>
+									<th id="dscto">Descuentos:</th>
 									<td class="textright"><input class="descuento" type='text' value='0' size='4px'> </input> %</td>
 								</tr>
 								<tr>

@@ -69,14 +69,6 @@ class Producto {
     private $alarma;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="Ruta_Imagen", type="string", length=255)
-     */
-    private $rutaImagen;
-
-
-    /**
      * Get id
      *
      * @return integer 
@@ -176,29 +168,6 @@ class Producto {
     public function getAlarma()
     {
         return $this->alarma;
-    }
-
-    /**
-     * Set rutaImagen
-     *
-     * @param string $rutaImagen
-     * @return Producto
-     */
-    public function setRutaImagen($rutaImagen)
-    {
-        $this->rutaImagen = $rutaImagen;
-    
-        return $this;
-    }
-
-    /**
-     * Get rutaImagen
-     *
-     * @return string 
-     */
-    public function getRutaImagen()
-    {
-        return $this->rutaImagen;
     }
 
     /**

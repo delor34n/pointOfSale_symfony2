@@ -76,6 +76,8 @@ $ ( document ).ready( function ( ) {
 
             $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
             $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+data.marca+"</td>");
+            $("#elementos_"+searchCode).append("<td>"+data.categoria+"</td>");
             $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
             $("#elementos_"+searchCode).append("<td id='precio'>"+data.precio+"</td>");
             $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");

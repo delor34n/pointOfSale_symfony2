@@ -38,8 +38,29 @@ body {
 }
 
 .descuento {
-	width: 50px;
+	width: 30px;
+	height:15px !important;
 	text-align: center;
+}
+
+#dscto {
+	margin-left: 2px;
+}
+
+#vendedores{
+	float:right;
+	margin-top:-27px;
+	margin-right:35px;
+}
+
+#atendido{
+	float:right;
+	margin-right:165px;
+	margin-top:-10px;
+}
+
+h5 #atendido{
+	line-height:0px;
 }
 /***************
 	COLORES
