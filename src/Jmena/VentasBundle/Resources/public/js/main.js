@@ -9,6 +9,18 @@ function precioInt ( price ) {
 
 $ ( document ).ready( function ( ) {
 
+  $( document ).on ( "change" ,  "input.descuento" , function() {
+
+    var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+    var dscto = $( ".descuento" ).val ( );
+
+    total = total - ( (dscto/100) * total );
+
+    $( "#TOTAL" ).text ( "$ " + total );
+
+  });
+
+
   $( document ).on ( "change" ,  "input.cantidad" , function() {
 
     var fila = $(this).closest( "tr" );
@@ -25,6 +37,13 @@ $ ( document ).ready( function ( ) {
     $( fila ).find( "#subtotal" ).text( ( precio * cantidad ) );
     subTotal = subTotal + ( precio * cantidad )
     $( "#SUBTOTAL" ).text ( "$ " + subTotal );
+
+    total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+    var dscto = $( ".descuento" ).val ( );
+
+    total = total - ( (dscto/100) * total );
+
+    $( "#TOTAL" ).text ( "$ " + total );
 
   });
 
@@ -60,24 +79,30 @@ $ ( document ).ready( function ( ) {
             $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
             $("#elementos_"+searchCode).append("<td id='precio'>"+data.precio+"</td>");
             $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
-            $("#elementos_"+searchCode).append("<td id='subtotal'> $ "+data.precio+"</td>");
+            $("#elementos_"+searchCode).append("<td id='subtotal'> "+data.precio+"</td>");
             $("#elementos_"+searchCode).append("<td></td>");
 
             $("#search").val('');
             $("#search").focus();
 
             subTotal = precioInt ( $( "#SUBTOTAL" ).text( ) );
+            total = subTotal + data.precio;
 
             if ( subTotal == 0 ){
 
               $( "#SUBTOTAL" ).text ( "$ " + data.precio );
 
             } else {
-
-              total = subTotal + data.precio;
+              
               $( "#SUBTOTAL" ).text ( "$ " + total );
 
             }
+
+            var dscto = $( ".descuento" ).val ( );
+
+            total = total - ( (dscto/100) * total );
+
+            $( "#TOTAL" ).text ( "$ " + total );
             
 
           } else if ( data.responseCode == 400 ) { //bad request
@@ -105,6 +130,12 @@ $ ( document ).ready( function ( ) {
 
       total = total + precio;
       $( "#SUBTOTAL" ).text ( "$ " + total );
+
+      var dscto = $( ".descuento" ).val ( );
+
+      total = total - ( (dscto/100) * total );
+
+      $( "#TOTAL" ).text ( "$ " + total );
 
       $("#search").val('');
       $("#search").focus();
