@@ -53,10 +53,14 @@ body {
 	color: red;
 }
 
+#vendedor {
+	color: blue;
+}
+
 #stock {
 	color:yellow;
 }
 
 #inventario {
-	color: blue;
+	color: lightgreen;
 }

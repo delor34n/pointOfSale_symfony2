@@ -1,21 +1,21 @@
 {% extends '::base.html.twig' %}
 
 {% block title%}
-    Nueva Marca
+    Nuevo Vendedor
     {{ parent() }}
 {% endblock%}
 
 {% block body -%}
-    <h2>Nueva Marca</h2>
+    <h2>Nuevo Vendedor</h2>
 
-    <form action="{{ path('marca_create') }}" method="post" {{ form_enctype(form) }}>
-        {{ form_rest(form) }}
+    <form action="{{ path('vendedor_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_widget(form) }}
         <p>
             <button class="btn btn-primary btn-large" type="submit">INGRESAR</button>
         </p>
     </form>
 
-    <a href="{{ path('categoria') }}">
+    <a href="{{ path('vendedor') }}">
         <i class="icon-chevron-left"></i>VOLVER
     </a>
 {% endblock %}

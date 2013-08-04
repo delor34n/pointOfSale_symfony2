@@ -246,4 +246,27 @@ class Producto {
     {
         return $this->marca;
     }
+
+    /**
+     * Set codigo
+     *
+     * @param string $codigo
+     * @return Producto
+     */
+    public function setCodigo($codigo)
+    {
+        $this->codigo = $codigo;
+    
+        return $this;
+    }
+
+    /**
+     * Get codigo
+     *
+     * @return string 
+     */
+    public function getCodigo()
+    {
+        return $this->codigo;
+    }
 }

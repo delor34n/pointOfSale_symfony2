@@ -111,6 +111,9 @@ class Marca {
     }
 
     public function __toString() {
+
         return $this->getDescripcion();
+
     }
+
 }

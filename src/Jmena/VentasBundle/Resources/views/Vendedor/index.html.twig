@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block title%}
+    Lista de Vendedores
+    {{ parent() }}
+{% endblock%}
+
+{% block body -%}
+    <h2>Lista de Vendedores</h2>
+    <a class="new btn btn-primary btn-large" href="{{ path('vendedor_new') }}">NUEVO VENDEDOR</a>
+    </br>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>RUT</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('vendedor_show', { 'id': entity.id }) }}">{{ entity.rut }}</a></td>
+                <td>{{ entity.nombre }} {{ entity.apellidoPa }} {{ entity.apellidoMa }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

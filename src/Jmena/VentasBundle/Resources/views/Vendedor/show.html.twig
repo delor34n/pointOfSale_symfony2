@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+
+{% block title%}
+    Detalle Vendedor
+    {{ parent() }}
+{% endblock%}
+
+{% block body -%}
+    <h2>Vendedor</h2>
+    <a class="new btn btn-primary btn-large" href="{{ path('vendedor_edit', { 'id': entity.id }) }}">
+            <i class="icon-edit"></i> EDITAR
+    </a>
+    <form class="new del" action="{{ path('vendedor_delete', { 'id': entity.id }) }}" method="post">
+        <input type="hidden" name="_method" value="DELETE" />
+        {{ form_rest(delete_form) }}
+        <button class="btn btn-danger btn-large" type="submit"><i class="icon-remove"></i> ELIMINAR</button>
+    </form>
+    </br>
+    <table class="table table-bordered">
+        <tbody>
+            <tr>
+                <th>RUT</th>
+                <td>{{ entity.rut }}</td>
+            </tr>
+            <tr>
+                <th>Nombre</th>
+                <td>{{ entity.nombre }}</td>
+            </tr>
+            <tr>
+                <th>Apellido Paterno</th>
+                <td>{{ entity.apellidoPa }}</td>
+            </tr>
+            <tr>
+                <th>Apellido Materno</th>
+                <td>{{ entity.apellidoMa }}</td>
+            </tr>
+            <tr>
+                <th>Fono Contacto</th>
+                <td>{{ entity.fono }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('vendedor') }}">
+        <i class="icon-chevron-left"></i>VOLVER
+    </a>
+{% endblock %}
