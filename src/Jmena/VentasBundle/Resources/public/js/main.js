@@ -1,4 +1,32 @@
+var subTotal = 0;
+
+function precioInt ( price ) {
+
+  var precio = price.split ( "$" );
+  return ( parseInt ( precio[1] ) );
+
+}
+
 $ ( document ).ready( function ( ) {
+
+  $( document ).on ( "change" ,  "input.cantidad" , function() {
+
+    var fila = $(this).closest( "tr" );
+
+    var cantidad = parseInt ( $( this ).val( ) );
+    var precio = parseInt ( $( fila ).find( "#precio" ).text());
+
+    var sub = parseInt ( $( fila ).find( "#subtotal" ).text());
+
+    //Descontamos lo anterior al SUBTOTAL general
+    var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+    subTotal = total - sub;
+
+    $( fila ).find( "#subtotal" ).text( ( precio * cantidad ) );
+    subTotal = subTotal + ( precio * cantidad )
+    $( "#SUBTOTAL" ).text ( "$ " + subTotal );
+
+  });
 
   //Limpiamos el campo de búsqueda de productos
   $("#search").val('');
@@ -26,19 +54,32 @@ $ ( document ).ready( function ( ) {
           if ( data.responseCode == 200 ) {
 
             var cantidad = "<input id='cantidad_"+searchCode+"' class='cantidad' type='text' value='1' size='4px'></input>";
-            var descuento = "<input id='descuento_"+searchCode+"' class='descuento' type='text' value='0%' size='4px'></input>";
 
             $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
             $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
             $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+data.precio+"</td>");
+            $("#elementos_"+searchCode).append("<td id='precio'>"+data.precio+"</td>");
             $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+descuento+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+data.precio+"</td>");
+            $("#elementos_"+searchCode).append("<td id='subtotal'> $ "+data.precio+"</td>");
             $("#elementos_"+searchCode).append("<td></td>");
 
             $("#search").val('');
             $("#search").focus();
+
+            subTotal = precioInt ( $( "#SUBTOTAL" ).text( ) );
+
+            if ( subTotal == 0 ){
+
+              $( "#SUBTOTAL" ).text ( "$ " + data.precio );
+
+            } else {
+
+              total = subTotal + data.precio;
+              $( "#SUBTOTAL" ).text ( "$ " + total );
+
+            }
+            
+
           } else if ( data.responseCode == 400 ) { //bad request
 
             alert( "Producto no existe!" );
@@ -53,6 +94,20 @@ $ ( document ).ready( function ( ) {
       var cantidad = parseInt ( $( "#cantidad_"+searchCode ).val( ) );
       cantidad = cantidad + 1;
       $( "#cantidad_"+searchCode ).val( cantidad );
+
+      var fila = $( "#cantidad_"+searchCode ).closest( "tr" );
+      var precio = parseInt ( $( fila ).find( "#precio" ).text());
+      $( fila ).find( "#subtotal" ).text( ( cantidad * precio ) );
+      //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
+      //******************************************
+
+      var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+
+      total = total + precio;
+      $( "#SUBTOTAL" ).text ( "$ " + total );
+
+      $("#search").val('');
+      $("#search").focus();
 
     }
     return false;

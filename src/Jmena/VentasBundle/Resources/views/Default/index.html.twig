@@ -4,7 +4,7 @@
     Venta
     {{ parent() }}
 {% endblock%}
-   
+
 {% block body %}
 	<div id="output"></div>
 	<h2>Venta</h2>
@@ -22,7 +22,6 @@
 				<th>Descripción</th>
 				<th>Precio</th>
 				<th>Cantidad</th>
-				<th>Descuento %</th>
 				<th>Total</th>
 				<th>Acciones</th>
 			</tr>
@@ -40,15 +39,15 @@
 							<tbody>
 								<tr>
 									<th>Sub Total:</th>
-									<td class="textright">$ 1000</td>
+									<td id="SUBTOTAL" class="textright">$ 0</td>
 								</tr>
 								<tr>
 									<th>Descuentos:</th>
-									<td class="textright">$ 100</td>
+									<td class="textright">0 %</td>
 								</tr>
 								<tr>
 									<th>Total:</th>
-									<td class="textright">$ 900</td>
+									<td class="textright">$ 0</td>
 								</tr>
 							</tbody>
 						</table>
