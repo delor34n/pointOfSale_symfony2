@@ -16,7 +16,6 @@ class ProductoType extends AbstractType
             ->add('stock', null , array ( 'label' => 'Stock' ) )
             ->add('alarma', null , array ( 'label' => 'Alarma' ) )
             ->add('valor', null , array ( 'label' => 'Valor' ) )
-            ->add('rutaImagen', null , array ( 'label' => 'Ruta Imagen' ) )
             ->add('categoria', null , array ( 'label' => 'Categoria' ) )
             ->add('marca', null , array ( 'label' => 'Marca' ) )
         ;
