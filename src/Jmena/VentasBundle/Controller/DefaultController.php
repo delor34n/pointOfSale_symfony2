@@ -60,9 +60,9 @@ class DefaultController extends Controller
                                       FROM JmenaVentasBundle:Producto P, JmenaVentasBundle:Marca M, JmenaVentasBundle:Categoria C
                                       WHERE P.categoria = C.id AND
                                       P.marca = M.id AND
-                                      P.descripcion LIKE '%' AND
-                                      M.descripcion LIKE '%' AND
-                                      C.descripcion LIKE '%bebida%'
+                                      P.descripcion LIKE '%".$id."%' AND
+                                      M.descripcion LIKE '%".$id."%' AND
+                                      C.descripcion LIKE '%".$id."%'
                                       GROUP BY P.codigo, P.descripcion, C.descripcion, M.descripcion");
 
         $entities = $query->getResult();
