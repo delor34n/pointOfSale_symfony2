@@ -58,6 +58,15 @@ $ ( document ).ready( function ( ) {
     //Obtenemos la ruta del action
     var url = $( "#searchForm" ).attr( "action" );
     var searchCode = $( "#search" ).val( );
+    var flag;
+
+    var intRegex = /[0-9 -()+]+$/;
+    if ( searchCode.match( intRegex ) > 0 )
+      //es un código
+      flag = 1;
+    else
+      //no es un código
+      flag = 0;
 
     //Hay que validar si el producto ya se encuentra en venta, para aumentar su cantidad
     if ( $("#elementos_"+searchCode).length == 0 ) { //No existe
@@ -66,6 +75,7 @@ $ ( document ).ready( function ( ) {
       $.post( url , {
 
             searchID: searchCode
+            validation: flag
 
       }, function(data){
         //Aquí va la respuesta
