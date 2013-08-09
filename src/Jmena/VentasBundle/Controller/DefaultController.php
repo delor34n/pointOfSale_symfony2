@@ -29,11 +29,11 @@ class DefaultController extends Controller
   		$request = $this -> get( 'request' );
      	$id = $request -> request -> get( 'searchID' );
       $flag = $request -> request -> get ( 'validation' );   		
+      $em = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
 
       if ( $flag == 1 ) {
         //En el caso en que sea un código
-        $repository = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
-        $producto = $repository -> findOneByCodigo( $id );
+        $producto = $em -> findOneByCodigo( $id );
 
         if ( $producto != "" ) { //Si no se ingreso o el ID del producto no existe
 
@@ -55,18 +55,8 @@ class DefaultController extends Controller
       } else {
         //En el caso en que no sea un código y sea un nombre o algo que esté dentro de las descripciones
         //del producto.
-        $em = $this -> getDoctrine( ) -> getEntityManager( );
-        $query = $em -> createQuery( "SELECT P.codigo, P.descripcion, C.descripcion, M.descripcion 
-                                      FROM JmenaVentasBundle:Producto P, JmenaVentasBundle:Marca M, JmenaVentasBundle:Categoria C
-                                      WHERE P.categoria = C.id AND
-                                      P.marca = M.id AND
-                                      P.descripcion LIKE '%".$id."%' AND
-                                      M.descripcion LIKE '%".$id."%' AND
-                                      C.descripcion LIKE '%".$id."%'
-                                      GROUP BY P.codigo, P.descripcion, C.descripcion, M.descripcion");
 
-        $entities = $query->getResult();
-        var_dump ( $entities );
+        $return = $em -> findAllProducts ( $id );
 
       }
 
@@ -80,12 +70,12 @@ class DefaultController extends Controller
 }
 
 /*PARA BUSCAR
-SELECT P.codigo, P.Descripcion, C.Descripcion, M.Descripcion
-FROM Producto P, Marca M, Categoria C
-WHERE P.id_categoria = C.id and
-P.id_marca = M.id and
-P.Descripcion LIKE '%' AND
-M.Descripcion LIKE '%' AND
-C.Descripcion LIKE '%bebida%'
-GROUP BY P.codigo, P.Descripcion, C.Descripcion, M.Descripcion
+  SELECT P.codigo, P.Descripcion, C.Descripcion, M.Descripcion
+  FROM Producto P 
+  INNER JOIN Marca M ON P.id_marca = M.id 
+  INNER JOIN  Categoria C ON P.id_categoria = C.id 
+  WHERE
+  P.Descripcion LIKE '%galleta%' OR
+  M.Descripcion LIKE '%bebida%' OR
+  C.Descripcion LIKE '%bebida%'
 */

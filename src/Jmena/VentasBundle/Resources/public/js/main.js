@@ -74,7 +74,7 @@ $ ( document ).ready( function ( ) {
       //Comenzamos a construir la petición POST
       $.post( url , {
 
-            searchID: searchCode
+            searchID: searchCode,
             validation: flag
 
       }, function(data){
