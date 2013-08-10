@@ -20,7 +20,6 @@ $ ( document ).ready( function ( ) {
 
   });
 
-
   $( document ).on ( "change" ,  "input.cantidad" , function() {
 
     var fila = $(this).closest( "tr" );
@@ -175,12 +174,42 @@ $ ( document ).ready( function ( ) {
 
               if ( data[pos].stock > 0 ) {
                 $("#elements").append("<tr id='elements_"+data[pos].codigo+"'></tr>");
-                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].codigo+"</td>");
-                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].maDesc+"</td>");
-                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].catDesc+"</td>");
-                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].proDesc+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td id='codigo'>"+data[pos].codigo+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td id='maDesc'>"+data[pos].maDesc+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td id='catDesc'>"+data[pos].catDesc+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td id='proDesc'>"+data[pos].proDesc+"</td>");
                 $("#elements_"+data[pos].codigo).append("<td id='precio'>$ "+data[pos].valor+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td id='stockProd'>"+data[pos].stock+"</td>");
               }
+
+            });
+
+            $( document ).on ( "click" ,  "#elements > tr" , function() {
+
+              var fila = $(this).closest( "tr" );
+
+              var codigo = $( fila ).find( "#codigo" ).text();
+              var marca = $( fila ).find( "#maDesc" ).text();
+              var categoria = $( fila ).find( "#catDesc" ).text();
+              var descripcion = $( fila ).find( "#proDesc" ).text();
+              var precio = $( fila ).find( "#precio" ).text();
+              var stock = $( fila ).find( "#stockProd" ).text();
+                  stock = "<input id='stock_"+codigo+"'' class='stock' type='hidden' value='"+stock+"'></input>";
+
+              var cantidad = "<input id='cantidad_"+codigo+"' class='cantidad' type='text' value='1' size='4px'></input>";              
+
+              $("#elementos").append("<tr id='elementos_"+codigo+"'></tr>");
+              $("#elementos_"+codigo).append("<td id='codigo'>"+codigo+"</td>");
+              $("#elementos_"+codigo).append("<td>"+marca+"</td>");
+              $("#elementos_"+codigo).append("<td>"+categoria+"</td>");
+              $("#elementos_"+codigo).append("<td>"+descripcion+"</td>");
+              $("#elementos_"+codigo).append("<td id='precio'>"+precio+"</td>");
+              $("#elementos_"+codigo).append("<td>"+cantidad+"</td>");
+              $("#elementos_"+codigo).append("<td id='subtotal'> "+precio+"</td>");
+              $("#elementos_"+codigo).append("<td></td>");
+              $("#elementos_"+codigo).append(stock);
+
+              $( this ).fadeOut("slow");
 
             });
 
@@ -202,6 +231,8 @@ $ ( document ).ready( function ( ) {
                 }
               });
             });
+
+
           }
 
       });
