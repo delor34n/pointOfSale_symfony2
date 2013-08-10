@@ -24,26 +24,40 @@ $ ( document ).ready( function ( ) {
   $( document ).on ( "change" ,  "input.cantidad" , function() {
 
     var fila = $(this).closest( "tr" );
+    var codigo = $( fila ).find( "#codigo" ).text();
 
+    var stock = parseInt ( $( "#stock_"+codigo ).val( ) );
     var cantidad = parseInt ( $( this ).val( ) );
-    var precio = parseInt ( $( fila ).find( "#precio" ).text());
+    console.log (codigo);
+    console.log (stock);
+    console.log (cantidad);
 
-    var sub = parseInt ( $( fila ).find( "#subtotal" ).text());
+    if ( stock >= cantidad ) {
+      var precio = parseInt ( $( fila ).find( "#precio" ).text());
 
-    //Descontamos lo anterior al SUBTOTAL general
-    var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
-    subTotal = total - sub;
+      var sub = parseInt ( $( fila ).find( "#subtotal" ).text());
 
-    $( fila ).find( "#subtotal" ).text( ( precio * cantidad ) );
-    subTotal = subTotal + ( precio * cantidad )
-    $( "#SUBTOTAL" ).text ( "$ " + subTotal );
+      //Descontamos lo anterior al SUBTOTAL general
+      var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+      subTotal = total - sub;
 
-    total = precioInt ( $( "#SUBTOTAL" ).text( ) );
-    var dscto = $( ".descuento" ).val ( );
+      $( fila ).find( "#subtotal" ).text( ( precio * cantidad ) );
+      subTotal = subTotal + ( precio * cantidad )
+      $( "#SUBTOTAL" ).text ( "$ " + subTotal );
 
-    total = total - ( (dscto/100) * total );
+      total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+      var dscto = $( ".descuento" ).val ( );
 
-    $( "#TOTAL" ).text ( "$ " + total );
+      total = total - ( (dscto/100) * total );
+
+      $( "#TOTAL" ).text ( "$ " + total );
+
+    } else {
+
+        alert ( "No hay tanto stock!");
+        $( this ).val( '1' );
+
+    }
 
   });
 
@@ -85,9 +99,10 @@ $ ( document ).ready( function ( ) {
             if ( parseInt ( data.stock ) > 0 ) {
 
               var cantidad = "<input id='cantidad_"+searchCode+"' class='cantidad' type='text' value='1' size='4px'></input>";
+              var stock = "<input id='stock_"+searchCode+"'' class='stock' type='hidden' value='"+data.stock+"'></input>";
 
               $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
-              $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
+              $("#elementos_"+searchCode).append("<td id='codigo'>"+searchCode+"</td>");
               $("#elementos_"+searchCode).append("<td>"+data.marca+"</td>");
               $("#elementos_"+searchCode).append("<td>"+data.categoria+"</td>");
               $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
@@ -95,6 +110,7 @@ $ ( document ).ready( function ( ) {
               $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
               $("#elementos_"+searchCode).append("<td id='subtotal'> "+data.precio+"</td>");
               $("#elementos_"+searchCode).append("<td></td>");
+              $("#elementos_"+searchCode).append(stock);
 
             } else {
 
