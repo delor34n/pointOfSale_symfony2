@@ -29,8 +29,10 @@
                 <td>{{ entity.descripcion }}</td>
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>
-            {% if entity.stock < entity.alarma %}
+            {% if entity.stock < entity.alarma and entity.stock != 0%}
                 <td> <span class="badge badge-important">Bajo Stock</span> </td>
+            {% elseif entity.stock == 0 %}
+                <td> <span class="badge badge-important">SIN STOCK</span> </td>
             {% else %}
                 <td> <span class="badge badge-success">Alto Stock</span> </td>
             {% endif %}
