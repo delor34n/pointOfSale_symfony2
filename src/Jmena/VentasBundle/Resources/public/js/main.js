@@ -82,17 +82,37 @@ $ ( document ).ready( function ( ) {
 
           if ( data.responseCode == 200 ) {
 
-            var cantidad = "<input id='cantidad_"+searchCode+"' class='cantidad' type='text' value='1' size='4px'></input>";
+            if ( parseInt ( data.stock ) > 0 ) {
 
-            $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
-            $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+data.marca+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+data.categoria+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
-            $("#elementos_"+searchCode).append("<td id='precio'>"+data.precio+"</td>");
-            $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
-            $("#elementos_"+searchCode).append("<td id='subtotal'> "+data.precio+"</td>");
-            $("#elementos_"+searchCode).append("<td></td>");
+              var cantidad = "<input id='cantidad_"+searchCode+"' class='cantidad' type='text' value='1' size='4px'></input>";
+
+              $("#elementos").append("<tr id='elementos_"+searchCode+"'></tr>");
+              $("#elementos_"+searchCode).append("<td>"+searchCode+"</td>");
+              $("#elementos_"+searchCode).append("<td>"+data.marca+"</td>");
+              $("#elementos_"+searchCode).append("<td>"+data.categoria+"</td>");
+              $("#elementos_"+searchCode).append("<td>"+data.descripcion+"</td>");
+              $("#elementos_"+searchCode).append("<td id='precio'>"+data.precio+"</td>");
+              $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
+              $("#elementos_"+searchCode).append("<td id='subtotal'> "+data.precio+"</td>");
+              $("#elementos_"+searchCode).append("<td></td>");
+
+            } else {
+
+              $(function() {
+                $( "#dialog-error" ).dialog({
+                  resizable: false,
+                  draggable: false,
+                  width:310,
+                  modal: true,
+                  buttons: {
+                    Cerrar: function() {
+                      $( this ).dialog( "close" );
+                    }
+                  }
+                });
+              });
+
+            }
 
             $("#search").val('');
             $("#search").focus();
@@ -121,6 +141,38 @@ $ ( document ).ready( function ( ) {
 
             alert( "Producto no existe!" );
 
+          } else { //en el caso de ingresar una descripcion para cargar los productos que coinciden
+
+            $.each (data, function ( pos ) {
+              $("#elements").append("<tr id='elements_"+data[pos].codigo+"'></tr>");
+              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].codigo+"</td>");
+              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].maDesc+"</td>");
+              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].catDesc+"</td>");
+              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].proDesc+"</td>");
+              $("#elements_"+data[pos].codigo).append("<td id='precio'>$ "+data[pos].valor+"</td>");
+            });
+
+            $(function() {
+              $( "#dialog" ).dialog({
+                autoOpen: true,
+                height: 550,
+                width: 1100,
+                modal: true,
+                draggable: false,
+                resizable: false,
+                show: {
+                  effect: "bounce",
+                  duration: 800
+                },
+                hide: {
+                  effect: "slide",
+                  duration: 800
+                }
+              });
+            });
+            $( ".ui-dialog-titlebar-close" ).click(function( ) {
+              $("#elements").empty();
+            });
           }
 
       });

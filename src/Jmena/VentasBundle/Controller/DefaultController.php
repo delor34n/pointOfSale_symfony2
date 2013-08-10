@@ -43,7 +43,8 @@ class DefaultController extends Controller
             "descripcion" => $producto -> getDescripcion( ),
             "precio" => $producto -> getValor( ),
             "marca" =>  $producto -> getMarca( ) -> getDescripcion ( ),
-            "categoria" => $producto -> getCategoria ( ) -> getDescripcion ( )
+            "categoria" => $producto -> getCategoria ( ) -> getDescripcion ( ),
+            "stock" => $producto -> getStock ( )
 
           );
 

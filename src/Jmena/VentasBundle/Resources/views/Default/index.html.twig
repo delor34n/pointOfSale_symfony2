@@ -76,4 +76,29 @@
 			</tfoot>
 		</table>
 	</div>
+	<div id="dialog" style="display:none" title="Lista de Productos">
+		<table class="items table table-striped table-bordered table-condensed">
+			<thead>
+				<tr>
+					<th>Código</th>
+					<th>Marca</th>
+					<th>Categoria</th>
+					<th>Descripción</th>
+					<th>Precio</th>
+				</tr>
+			</thead>
+			<tbody id="elements">
+			</tbody>
+		</table>
+	</div>
+
+	<div id="dialog-error" title="Error en Stock de Producto" style="display:none;">
+		<p>
+			</br>
+			<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+			¡NO HAY STOCK DEL PRODUCTO!
+			</br>
+		</p>
+	</div>
+
 {% endblock %}
