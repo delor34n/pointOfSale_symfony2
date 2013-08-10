@@ -28,9 +28,6 @@ $ ( document ).ready( function ( ) {
 
     var stock = parseInt ( $( "#stock_"+codigo ).val( ) );
     var cantidad = parseInt ( $( this ).val( ) );
-    console.log (codigo);
-    console.log (stock);
-    console.log (cantidad);
 
     if ( stock >= cantidad ) {
       var precio = parseInt ( $( fila ).find( "#precio" ).text());
@@ -54,7 +51,21 @@ $ ( document ).ready( function ( ) {
 
     } else {
 
-        alert ( "No hay tanto stock!");
+        $(".stockProducto").empty();
+        $(".stockProducto").append(stock);
+        $(function() {
+          $( "#dialog-stock" ).dialog({
+            resizable: false,
+            draggable: false,
+            width:300,
+            modal: true,
+            buttons: {
+              Cerrar: function() {
+                $( this ).dialog( "close" );
+              }
+            }
+          });
+        });
         $( this ).val( '1' );
 
     }
@@ -159,13 +170,18 @@ $ ( document ).ready( function ( ) {
 
           } else { //en el caso de ingresar una descripcion para cargar los productos que coinciden
 
+            $("#elements").empty();
             $.each (data, function ( pos ) {
-              $("#elements").append("<tr id='elements_"+data[pos].codigo+"'></tr>");
-              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].codigo+"</td>");
-              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].maDesc+"</td>");
-              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].catDesc+"</td>");
-              $("#elements_"+data[pos].codigo).append("<td>"+data[pos].proDesc+"</td>");
-              $("#elements_"+data[pos].codigo).append("<td id='precio'>$ "+data[pos].valor+"</td>");
+
+              if ( data[pos].stock > 0 ) {
+                $("#elements").append("<tr id='elements_"+data[pos].codigo+"'></tr>");
+                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].codigo+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].maDesc+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].catDesc+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td>"+data[pos].proDesc+"</td>");
+                $("#elements_"+data[pos].codigo).append("<td id='precio'>$ "+data[pos].valor+"</td>");
+              }
+
             });
 
             $(function() {
@@ -185,9 +201,6 @@ $ ( document ).ready( function ( ) {
                   duration: 800
                 }
               });
-            });
-            $( ".ui-dialog-titlebar-close" ).click(function( ) {
-              $("#elements").empty();
             });
           }
 

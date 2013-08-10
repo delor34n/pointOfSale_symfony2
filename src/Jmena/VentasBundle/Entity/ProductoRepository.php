@@ -17,7 +17,7 @@ class ProductoRepository extends EntityRepository {
 		return $this -> getEntityManager( )
     		->createQuery( "
 
-            	SELECT P.codigo, P.valor, P.descripcion AS proDesc, C.descripcion AS catDesc, M.descripcion AS maDesc
+            	SELECT P.codigo, P.valor, P.stock, P.descripcion AS proDesc, C.descripcion AS catDesc, M.descripcion AS maDesc
                 FROM JmenaVentasBundle:Producto P 
             	  INNER JOIN JmenaVentasBundle:Marca M WITH P.marca = M.id 
               	INNER JOIN JmenaVentasBundle:Categoria C WITH P.categoria = C.id 

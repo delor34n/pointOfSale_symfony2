@@ -66,6 +66,10 @@ h5 #atendido{
 .ui-dialog .ui-dialog-buttonpane button {
 	margin: 0.5em 6.8em 0.5em 0;
 }
+
+.stockProducto {
+	display:inline;
+}
 /***************
 	COLORES
 ****************/
