@@ -69,14 +69,3 @@ class DefaultController extends Controller
     }
 
 }
-
-/*PARA BUSCAR
-  SELECT P.codigo, P.Descripcion, C.Descripcion, M.Descripcion
-  FROM Producto P 
-  INNER JOIN Marca M ON P.id_marca = M.id 
-  INNER JOIN  Categoria C ON P.id_categoria = C.id 
-  WHERE
-  P.Descripcion LIKE '%galleta%' OR
-  M.Descripcion LIKE '%bebida%' OR
-  C.Descripcion LIKE '%bebida%'
-*/
