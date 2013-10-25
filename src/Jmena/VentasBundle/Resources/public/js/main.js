@@ -28,7 +28,9 @@ $ ( document ).ready( function ( ) {
     var stock = parseInt ( $( "#stock_"+codigo ).val( ) );
     var cantidad = parseInt ( $( this ).val( ) );
 
+    //Comprobamos si la nueva cantidad es menor al stock del producto
     if ( stock >= cantidad ) {
+
       var precio = parseInt ( $( fila ).find( "#precio" ).text());
 
       var sub = parseInt ( $( fila ).find( "#subtotal" ).text());
@@ -189,25 +191,75 @@ $ ( document ).ready( function ( ) {
               var fila = $(this).closest( "tr" );
 
               var codigo = $( fila ).find( "#codigo" ).text();
-              var marca = $( fila ).find( "#maDesc" ).text();
-              var categoria = $( fila ).find( "#catDesc" ).text();
-              var descripcion = $( fila ).find( "#proDesc" ).text();
-              var precio = $( fila ).find( "#precio" ).text();
-              var stock = $( fila ).find( "#stockProd" ).text();
-                  stock = "<input id='stock_"+codigo+"'' class='stock' type='hidden' value='"+stock+"'></input>";
 
-              var cantidad = "<input id='cantidad_"+codigo+"' class='cantidad' type='text' value='1' size='4px'></input>";              
+              if ( $("#elementos_"+codigo).length == 0 ) {
 
-              $("#elementos").append("<tr id='elementos_"+codigo+"'></tr>");
-              $("#elementos_"+codigo).append("<td id='codigo'>"+codigo+"</td>");
-              $("#elementos_"+codigo).append("<td>"+marca+"</td>");
-              $("#elementos_"+codigo).append("<td>"+categoria+"</td>");
-              $("#elementos_"+codigo).append("<td>"+descripcion+"</td>");
-              $("#elementos_"+codigo).append("<td id='precio'>"+precio+"</td>");
-              $("#elementos_"+codigo).append("<td>"+cantidad+"</td>");
-              $("#elementos_"+codigo).append("<td id='subtotal'> "+precio+"</td>");
-              $("#elementos_"+codigo).append("<td></td>");
-              $("#elementos_"+codigo).append(stock);
+                var marca = $( fila ).find( "#maDesc" ).text();
+                var categoria = $( fila ).find( "#catDesc" ).text();
+                var descripcion = $( fila ).find( "#proDesc" ).text();
+                var precio = $( fila ).find( "#precio" ).text();
+                var stock = $( fila ).find( "#stockProd" ).text();
+                    stock = "<input id='stock_"+codigo+"'' class='stock' type='hidden' value='"+stock+"'></input>";
+
+                var cantidad = "<input id='cantidad_"+codigo+"' class='cantidad' type='text' value='1' size='4px'></input>";              
+
+                $("#elementos").append("<tr id='elementos_"+codigo+"'></tr>");
+                $("#elementos_"+codigo).append("<td id='codigo'>"+codigo+"</td>");
+                $("#elementos_"+codigo).append("<td>"+marca+"</td>");
+                $("#elementos_"+codigo).append("<td>"+categoria+"</td>");
+                $("#elementos_"+codigo).append("<td>"+descripcion+"</td>");
+                $("#elementos_"+codigo).append("<td id='precio'>"+precio+"</td>");
+                $("#elementos_"+codigo).append("<td>"+cantidad+"</td>");
+                $("#elementos_"+codigo).append("<td id='subtotal'> "+precio+"</td>");
+                $("#elementos_"+codigo).append("<td></td>");
+                $("#elementos_"+codigo).append(stock);
+
+                subTotal = precioInt ( $( "#SUBTOTAL" ).text( ) );
+                console.log(subTotal);
+                total = subTotal + precioInt(precio);
+
+                if ( subTotal == 0 ){
+
+                  $( "#SUBTOTAL" ).text ( "$ " + precioInt(precio) );
+
+                } else {
+                  
+                  $( "#SUBTOTAL" ).text ( "$ " + total );
+
+                }
+
+                var dscto = $( ".descuento" ).val ( );
+
+                total = total - ( (dscto/100) * total );
+
+                $( "#TOTAL" ).text ( "$ " + total );
+
+              } else {
+
+                  //Aquí es donde solucionamos el problema de un elemento que se ingrese y sea duplicado.
+                  //Para esto debemos hacer que aumente la cantidad del mismo elemento... just that (:
+                  var cantidad = parseInt ( $( "#cantidad_"+codigo ).val( ) );
+                  cantidad = cantidad + 1;
+                  $( "#cantidad_"+codigo ).val( cantidad );
+
+                  var fila = $( "#cantidad_"+codigo ).closest( "tr" );
+                  var precio = parseInt ( $( fila ).find( "#precio" ).text());
+                  $( fila ).find( "#subtotal" ).text( ( cantidad * precio ) );
+                  //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
+                  //******************************************
+
+                  var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+
+                  total = total + precio;
+                  $( "#SUBTOTAL" ).text ( "$ " + total );
+
+                  var dscto = $( ".descuento" ).val ( );
+
+                  total = total - ( (dscto/100) * total );
+
+                  $( "#TOTAL" ).text ( "$ " + total );
+
+              }
 
               $( this ).fadeOut("slow");
 
