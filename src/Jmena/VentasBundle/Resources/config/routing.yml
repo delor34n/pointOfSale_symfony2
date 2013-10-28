@@ -33,6 +33,12 @@ _buscar:
     requirements:
         _method:  POST
 
+_vender:
+    path: /vender
+    defaults: { _controller: JmenaVentasBundle:Default:venta }
+    requirements:
+        _method:  POST
+
 _vendedor:
     path: /_vendedor
     defaults: { _controller: JmenaVentasBundle:Vendedor:index }

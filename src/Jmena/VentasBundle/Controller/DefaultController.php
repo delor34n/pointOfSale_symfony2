@@ -68,4 +68,22 @@ class DefaultController extends Controller
 
     }
 
+    public function ventaAction ( ) {
+
+      $request = $this -> get( 'request' );
+      $id = $request -> request -> get( 'vender' );
+      $flag = $request -> request -> get ( 'validation' );      
+      $em = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
+
+      $productCode="00101919101";
+      $newStock=101;
+
+      $producto = $em -> updateStock( $productCode , $newStock );
+
+
+
+
+
+    }
+
 }

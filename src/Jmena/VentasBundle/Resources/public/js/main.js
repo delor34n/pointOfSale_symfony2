@@ -87,6 +87,8 @@ $ ( document ).ready( function ( ) {
   **********************************************************************/
   $( "#searchForm" ).submit( function ( ) {
 
+    var searchCode = $( "#search" ).val( );
+
     //Borramos lo que buscamos y...
     $("#search").val('');
     // situamos la búsqueda como el campo activo para disparar con la pistola
@@ -94,7 +96,6 @@ $ ( document ).ready( function ( ) {
 
     //Obtenemos la ruta del action
     var url = $( "#searchForm" ).attr( "action" );
-    var searchCode = $( "#search" ).val( );
     var flag;
 
     var intRegex = /[0-9 -()+]+$/;
@@ -260,7 +261,7 @@ $ ( document ).ready( function ( ) {
                     stock = "<input id='stock_"+codigo+"' class='stock' type='hidden' value='"+stock+"'></input>";
 
                 var cantidad = "<input id='cantidad_"+codigo+"' class='cantidad' type='text' value='1' size='4px'></input>";
-                var oldCantidad = "<input id='oldCantidad_"+searchCode+"' class='cantidad' type='hidden' value='1'></input>";
+                var oldCantidad = "<input id='oldCantidad_"+codigo+"' class='cantidad' type='hidden' value='1'></input>";
 
                 $("#elementos").append("<tr id='elementos_"+codigo+"'></tr>");
                 $("#elementos_"+codigo).append("<td id='codigo'>"+codigo+"</td>");
@@ -304,7 +305,7 @@ $ ( document ).ready( function ( ) {
 
                   var fila = $( "#cantidad_"+codigo ).closest( "tr" );
                   var precio = precioInt ( $( fila ).find( "#precio" ).text());
-                  $( fila ).find( "#subtotal" ).text( ( cantidad * precio ) );
+                  $( fila ).find( "#subtotal" ).text( ( "$"+cantidad * precio ) );
                   //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
                   //******************************************
 
@@ -339,7 +340,7 @@ $ ( document ).ready( function ( ) {
 
       var fila = $( "#cantidad_"+searchCode ).closest( "tr" );
       var precio = precioInt ( $( fila ).find( "#precio" ).text());
-      $( fila ).find( "#subtotal" ).text( ( cantidad * precio ) );
+      $( fila ).find( "#subtotal" ).text( ( "$"+cantidad * precio ) );
       //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
       //******************************************
 
@@ -360,4 +361,64 @@ $ ( document ).ready( function ( ) {
     }
     return false;
   });
+
+  /*
+    Esta parte del código se ejecutará cuando se realice la venta ... Petición AJAX para actualizar
+    el stock del producto y además mandaremos a imprimir la boleta...
+  */
+  $( "#vender" ).submit( function ( ) {
+
+    //Verificamos si existen elementos para vender
+    if ( $("#elementos").has( "tr" ).length > 0 ) {
+
+      //Creamos un objeto Json
+      productosJson = [];
+
+      //Iteramos sobre cada uno de los elementos de la tabla
+      $('#elementos > tr').each(function() {
+
+        //Creamos un array
+        item = {};
+
+        //Almacenamos el código del producto
+        item["productCode"] = $(this).find("#codigo").text();
+        //Y calculamos su nuevo stock
+        item["newStock"] = $(this).find(".stock").val() - $(this).find(".cantidad").val();
+
+        //Agregamos el nuevo elemento al objeto Json
+        productosJson.push(item);
+
+      });
+
+      var url = $( "#vender" ).attr( "action" );
+
+      $.post( url , {
+
+          productos: productosJson
+
+        }, function ( data ) {
+
+          if ( data.responseCode == 200 ) {
+
+            //Significa que podemos imprimir el vale...
+
+          }
+          if ( data.responseCode == 400 ) {
+
+            //Ćódigo de error
+
+          }
+
+      });
+
+    } else { //cuando no hay ...
+
+        alert ( "¡Debe agregar productos para vender!");
+
+    }
+
+    return false;
+
+  });
+
 });

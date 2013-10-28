@@ -68,9 +68,11 @@
 			<tfoot>
 				<tr>
 					<td class="results sidebar-content" style="text-align:right" colspan="2">
-						<span id="total" class="btn btn-info btn-large disabled">
-							VENDER
-						</span>
+						<form id="vender" method="POST" action="{{path('_vender')}}">
+							<button id="total" class="btn btn-info btn-large">
+								VENDER
+							</button>
+						</form>
 					</td>
 				</tr>
 			</tfoot>
