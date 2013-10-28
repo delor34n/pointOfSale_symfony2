@@ -401,11 +401,10 @@ $ ( document ).ready( function ( ) {
           if ( data.responseCode == 200 ) {
 
             //Significa que podemos imprimir el vale...
+            
 
-          }
-          if ( data.responseCode == 400 ) {
-
-            //Ćódigo de error
+            //Recargamos la página para poder realizar una nueva venta...
+            location.reload ( );
 
           }
 

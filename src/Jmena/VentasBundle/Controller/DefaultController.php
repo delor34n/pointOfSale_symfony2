@@ -71,18 +71,19 @@ class DefaultController extends Controller
     public function ventaAction ( ) {
 
       $request = $this -> get( 'request' );
-      $id = $request -> request -> get( 'vender' );
-      $flag = $request -> request -> get ( 'validation' );      
+      $productos = $request -> request -> get( 'productos' );
+
       $em = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
 
-      $productCode="00101919101";
-      $newStock=101;
+      for ( $i = 0 ; $i < count($productos) ; $i++ ) {
+        
+        $em -> updateStock( $productos[$i]["productCode"] , $productos[$i]["newStock"] );
 
-      $producto = $em -> updateStock( $productCode , $newStock );
+      }
 
+      $return = json_encode ( array ( "responseCode" => 200 ) );
 
-
-
+      return new Response(  $return , 200 , array( 'Content-Type' => 'application/json' ) );
 
     }
 
