@@ -47,7 +47,7 @@ class ProductoController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('JmenaVentasBundle:Producto')->findAll();
+        $entities = $em->getRepository('JmenaVentasBundle:Producto')->allStock();
 
         return array(
             'entities' => $entities,

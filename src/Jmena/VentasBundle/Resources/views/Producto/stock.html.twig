@@ -12,6 +12,8 @@
         <thead>
             <tr>
                 <th>Código</th>
+                <th>Marca</th>
+                <th>Categoria</th>
                 <th>Descripción</th>
                 <th>Stock</th>
                 <th>Alarma</th>
@@ -25,8 +27,10 @@
             {% else %}
                 <tr>
             {% endif %}
-                <td><a href="{{ path('producto_show', { 'id': entity.id }) }}">{{ entity.codigo }}</a></td>
-                <td>{{ entity.descripcion }}</td>
+                <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
+                <td>{{ entity.maDesc }}</td>
+                <td>{{ entity.catDesc }}</td>
+                <td>{{ entity.proDesc }}</td>
                 <td>{{ entity.stock }}</td>
                 <td>{{ entity.alarma }}</td>
             {% if entity.stock < entity.alarma and entity.stock != 0%}

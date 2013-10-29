@@ -299,26 +299,52 @@ $ ( document ).ready( function ( ) {
                   //Aquí validamos cuando ya se había agregado el producto a la venta
                   //Para esto debemos hacer que aumente la cantidad del mismo elemento... just that (:
                   var cantidad = parseInt ( $( "#cantidad_"+codigo ).val( ) );
-                  cantidad = cantidad + 1;
-                  $( "#cantidad_"+codigo ).val( cantidad );
-                  $( "#oldCantidad_"+codigo ).val( cantidad );
 
-                  var fila = $( "#cantidad_"+codigo ).closest( "tr" );
-                  var precio = precioInt ( $( fila ).find( "#precio" ).text());
-                  $( fila ).find( "#subtotal" ).text( ( "$"+cantidad * precio ) );
-                  //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
-                  //******************************************
+                  var stock = parseInt ( $( "#stock_"+codigo ).val( ) );
 
-                  var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+                  if ( cantidad >= stock ) {
 
-                  total = total + precio;
-                  $( "#SUBTOTAL" ).text ( "$ " + total );
+                    $(".stockProducto").empty();
+                    $(".stockProducto").append(stock);
+                    $(function() {
+                      $( "#dialog-stock" ).dialog({
+                        resizable: false,
+                        draggable: false,
+                        width:300,
+                        modal: true,
+                        buttons: {
+                          Cerrar: function() {
+                            $( this ).dialog( "close" );
+                          }
+                        }
+                      });
+                    });
+                    $( this ).val( parseInt($("#oldCantidad_"+codigo).val()));
 
-                  var dscto = $( ".descuento" ).val ( );
+                  } else {
 
-                  total = total - ( (dscto/100) * total );
+                    cantidad = cantidad + 1;
+                    $( "#cantidad_"+codigo ).val( cantidad );
+                    $( "#oldCantidad_"+codigo ).val( cantidad );
 
-                  $( "#TOTAL" ).text ( "$ " + total );
+                    var fila = $( "#cantidad_"+codigo ).closest( "tr" );
+                    var precio = precioInt ( $( fila ).find( "#precio" ).text());
+                    $( fila ).find( "#subtotal" ).text( ( "$"+cantidad * precio ) );
+                    //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
+                    //******************************************
+
+                    var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+
+                    total = total + precio;
+                    $( "#SUBTOTAL" ).text ( "$ " + total );
+
+                    var dscto = $( ".descuento" ).val ( );
+
+                    total = total - ( (dscto/100) * total );
+
+                    $( "#TOTAL" ).text ( "$ " + total );
+
+                  }
 
               }
 
@@ -334,29 +360,54 @@ $ ( document ).ready( function ( ) {
       //Aquí es donde solucionamos el problema de un elemento que se ingrese y sea duplicado.
       //Para esto debemos hacer que aumente la cantidad del mismo elemento... just that (:
       var cantidad = parseInt ( $( "#cantidad_"+searchCode ).val( ) );
-      cantidad = cantidad + 1;
-      $( "#cantidad_"+searchCode ).val( cantidad );
-      $( "#oldCantidad_"+searchCode ).val( cantidad );
+      var stock = parseInt ( $( "#stock_"+searchCode ).val( ) );
 
-      var fila = $( "#cantidad_"+searchCode ).closest( "tr" );
-      var precio = precioInt ( $( fila ).find( "#precio" ).text());
-      $( fila ).find( "#subtotal" ).text( ( "$"+cantidad * precio ) );
-      //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
-      //******************************************
+      if ( cantidad >= stock ) {
 
-      var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
+        $(".stockProducto").empty();
+        $(".stockProducto").append(stock);
+        $(function() {
+          $( "#dialog-stock" ).dialog({
+            resizable: false,
+            draggable: false,
+            width:300,
+            modal: true,
+            buttons: {
+              Cerrar: function() {
+                $( this ).dialog( "close" );
+              }
+            }
+          });
+        });
+        $( this ).val( parseInt($("#oldCantidad_"+searchCode).val()));
 
-      total = total + precio;
-      $( "#SUBTOTAL" ).text ( "$ " + total );
+      } else {
 
-      var dscto = $( ".descuento" ).val ( );
+        cantidad = cantidad + 1;
+        $( "#cantidad_"+searchCode ).val( cantidad );
+        $( "#oldCantidad_"+searchCode ).val( cantidad );
 
-      total = total - ( (dscto/100) * total );
+        var fila = $( "#cantidad_"+searchCode ).closest( "tr" );
+        var precio = precioInt ( $( fila ).find( "#precio" ).text());
+        $( fila ).find( "#subtotal" ).text( ( "$"+cantidad * precio ) );
+        //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
+        //******************************************
 
-      $( "#TOTAL" ).text ( "$ " + total );
+        var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
 
-      $("#search").val('');
-      $("#search").focus();
+        total = total + precio;
+        $( "#SUBTOTAL" ).text ( "$ " + total );
+
+        var dscto = $( ".descuento" ).val ( );
+
+        total = total - ( (dscto/100) * total );
+
+        $( "#TOTAL" ).text ( "$ " + total );
+
+        $("#search").val('');
+        $("#search").focus();
+
+      }
 
     }
     return false;

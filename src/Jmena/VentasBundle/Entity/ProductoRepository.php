@@ -31,6 +31,21 @@ class ProductoRepository extends EntityRepository {
 
 	}
 
+  public function allStock ( ) {
+
+    return $this -> getEntityManager( )
+                 -> createQuery( "
+
+                    SELECT P.alarma, P.codigo, P.valor, P.stock, P.id AS productoID, P.descripcion AS proDesc, C.descripcion AS catDesc, M.descripcion AS maDesc
+                    FROM JmenaVentasBundle:Producto P 
+                    INNER JOIN JmenaVentasBundle:Marca M WITH P.marca = M.id 
+                    INNER JOIN JmenaVentasBundle:Categoria C WITH P.categoria = C.id 
+
+                  ")
+                 -> getResult( );
+
+  }
+
   public function updateStock ( $productCode , $newStock ) {
 
     $this -> getEntityManager ( )
