@@ -22,36 +22,68 @@
         </thead>
         <tbody>
         {% for entity in entities %}
-            {% if entity.stock <= entity.alarma %}
-                <tr class="error">
-                    <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
-                    <td>{{ entity.maDesc }}</td>
-                    <td>{{ entity.catDesc }}</td>
-                    <td>{{ entity.proDesc }}</td>
-                    <td>{{ entity.stock }}</td>
-                    <td>{{ entity.alarma }}</td>
-                {% if entity.stock <= entity.alarma and entity.stock != 0%}
-                    <td> <span class="badge badge-important">Bajo Stock</span> </td>
-                {% elseif entity.stock == 0 %}
-                    <td> <span class="badge badge-important">SIN STOCK</span> </td>
-                {% endif %}
-                </tr>
+            <tr>
+                <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
+                <td>{{ entity.maDesc }}</td>
+                <td>{{ entity.catDesc }}</td>
+                <td>{{ entity.proDesc }}</td>
+                <td>{{ entity.stock }}</td>
+                <td>{{ entity.alarma }}</td>
+            {% if entity.stock <= entity.alarma and entity.stock != 0%}
+                <td> <span class="badge badge-important">Bajo Stock</span> </td>
+            {% elseif entity.stock == 0 %}
+                <td> <span class="badge badge-important">SIN STOCK</span> </td>
+            {% else %}
+                <td> <span class="badge badge-success">Alto Stock</span> </td>
             {% endif %}
+            </tr>
         {% endfor %}
 
-        {% for entity in entities %}
-            {% if entity.stock > entity.alarma %}
-                <tr>
-                    <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
-                    <td>{{ entity.maDesc }}</td>
-                    <td>{{ entity.catDesc }}</td>
-                    <td>{{ entity.proDesc }}</td>
-                    <td>{{ entity.stock }}</td>
-                    <td>{{ entity.alarma }}</td>
-                    <td> <span class="badge badge-success">Alto Stock</span> </td>
-                </tr>
-            {% endif %}
-        {% endfor %}
         </tbody>
     </table>
+    <script>
+
+        $('.table').dataTable( {
+            "sDom": '<"top"<"right-pags"p><"left-search"f>>rt<"bottom"i>',
+
+            /*Ordenar por ..*/
+            "aaSorting": [[ 6, "desc" ]],
+
+            "bPaginate": true,
+            "bLengthChange": false,
+            "bFilter": true,
+            "bSort": true,
+            "bInfo": true,
+            "bAutoWidth": true,
+            "iDisplayLength": 30,
+
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                "sZeroRecords": "No se encontró nada - Lo sentimos :C",
+                "sInfo": "Mostrando desde registro _START_ al _END_ de _TOTAL_ registros en total",
+                "sInfoEmpty": "Mostrando desde registro 0 al 0 de 0 TOTALES",
+                "sInfoFiltered": "(filtrado de _MAX_ productos)",
+                "sSearch": "Buscar:",
+                
+                "oPaginate": {
+                    "sNext": "Siguiente",
+                    "sPrevious": "Anterior"
+                }
+            }
+
+        } );
+
+        $.extend( $.fn.dataTableExt.oStdClasses, {
+            "sSortAsc": "header headerSortDown",
+            "sSortDesc": "header headerSortUp",
+            "sSortable": "header"
+        } );
+
+        $ ( document ).ready( function ( ) {
+
+            $("#DataTables_Table_0_filter > label > input").focus();
+
+        });
+
+    </script>
 {% endblock %}

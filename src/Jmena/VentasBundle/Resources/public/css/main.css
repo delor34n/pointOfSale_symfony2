@@ -42,13 +42,13 @@ input {
 }
 #vendedores{
 	float:right;
-	margin-top:-27px;
-	margin-right:35px;
+	margin-top:18px;
+	margin-right:-218px;
 }
 #atendido{
 	float:right;
 	margin-right:165px;
-	margin-top:-10px;
+	margin-top:-12px;
 }
 h5 #atendido{
 	line-height:0px;
@@ -94,4 +94,51 @@ h5 #atendido{
 }
 #vuelto{
 	text-align: center;
+}
+.container{
+	width: 1000px !important;
+}
+.top{
+	margin-top: 20px;
+}
+.left-search{
+	margin-right: 227px;
+}
+.right-pags{
+	margin-right: 230px;
+	margin-top:10px;
+}
+/*
+	TO FIX DATATABLES
+*/
+div.dataTables_length label {
+    width: 460px;
+    float: left;
+    text-align: left;
+}
+ 
+div.dataTables_length select {
+    width: 75px;
+}
+ 
+div.dataTables_filter label {
+    float: left;
+    width: 1000px;
+    margin-right:500px;
+    margin-bottom: 20px;
+}
+ 
+div.dataTables_info {
+    padding-top: 8px;
+}
+ 
+div.dataTables_paginate {
+    float: right;
+    margin-right: -230px;
+    margin-top: 10px;
+}
+ 
+table {
+    margin: 1em 0;
+    clear: both;
 }
