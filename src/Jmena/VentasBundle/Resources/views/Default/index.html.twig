@@ -34,7 +34,7 @@
 				<th>Precio</th>
 				<th>Cantidad</th>
 				<th>Total</th>
-				<th>Acciones</th>
+				<th>Eliminar</th>
 			</tr>
 		</thead>
 		<tbody id="elementos">
@@ -58,7 +58,7 @@
 								</tr>
 								<tr>
 									<th>Total:</th>
-									<td id="TOTAL" class="textright">$ 0</td>
+									<td id="TOTAL" class="textright">$0</td>
 								</tr>
 							</tbody>
 						</table>
@@ -99,7 +99,25 @@
 		<p>
 			</br>
 			<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-			¡NO HAY STOCK DEL PRODUCTO!
+			<b>¡NO HAY STOCK DEL PRODUCTO!</b>
+			</br>
+		</p>
+	</div>
+
+	<div id="dialog-prodE" title="Error en búsqueda de productos" style="display:none;">
+		<p>
+			</br>
+			<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+			<b>¡EL PRODUCTO NO EXISTE!</b>
+			</br>
+		</p>
+	</div>
+
+	<div id="dialog-venderE" title="Error en venta de productos" style="display:none;">
+		<p>
+			</br>
+			<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
+			<b>¡ANTES DE VENDER DEBE AGREGAR PRODUCTO!</b>
 			</br>
 		</p>
 	</div>
@@ -108,7 +126,17 @@
 		<p>
 			</br>
 			<span class="ui-icon ui-icon-alert" style="float: left; margin: 0 7px 20px 0;"></span>
-			El stock disponible del producto es <div class="stockProducto"></div> unidades.
+			<b>El stock disponible del producto es <div class="stockProducto"></div> unidades.</b>
+			</br>
+		</p>
+	</div>
+
+	<div id="dialog-vuelto" title="Vuelto" style="display:none;">
+		<p>
+			</br>
+			<div id="line01">Paga con $ <input id="paga" type="text"></input></div>
+			</br>
+			<div id="line02">Vuelto $ <h2><div id="vuelto"></div></h2></div>
 			</br>
 		</p>
 	</div>

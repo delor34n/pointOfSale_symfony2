@@ -22,25 +22,35 @@
         </thead>
         <tbody>
         {% for entity in entities %}
-            {% if entity.stock < entity.alarma %}
+            {% if entity.stock <= entity.alarma %}
                 <tr class="error">
-            {% else %}
+                    <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
+                    <td>{{ entity.maDesc }}</td>
+                    <td>{{ entity.catDesc }}</td>
+                    <td>{{ entity.proDesc }}</td>
+                    <td>{{ entity.stock }}</td>
+                    <td>{{ entity.alarma }}</td>
+                {% if entity.stock <= entity.alarma and entity.stock != 0%}
+                    <td> <span class="badge badge-important">Bajo Stock</span> </td>
+                {% elseif entity.stock == 0 %}
+                    <td> <span class="badge badge-important">SIN STOCK</span> </td>
+                {% endif %}
+                </tr>
+            {% endif %}
+        {% endfor %}
+
+        {% for entity in entities %}
+            {% if entity.stock > entity.alarma %}
                 <tr>
+                    <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
+                    <td>{{ entity.maDesc }}</td>
+                    <td>{{ entity.catDesc }}</td>
+                    <td>{{ entity.proDesc }}</td>
+                    <td>{{ entity.stock }}</td>
+                    <td>{{ entity.alarma }}</td>
+                    <td> <span class="badge badge-success">Alto Stock</span> </td>
+                </tr>
             {% endif %}
-                <td><a href="{{ path('producto_edit', { 'id': entity.productoID }) }}">{{ entity.codigo }}</a></td>
-                <td>{{ entity.maDesc }}</td>
-                <td>{{ entity.catDesc }}</td>
-                <td>{{ entity.proDesc }}</td>
-                <td>{{ entity.stock }}</td>
-                <td>{{ entity.alarma }}</td>
-            {% if entity.stock < entity.alarma and entity.stock != 0%}
-                <td> <span class="badge badge-important">Bajo Stock</span> </td>
-            {% elseif entity.stock == 0 %}
-                <td> <span class="badge badge-important">SIN STOCK</span> </td>
-            {% else %}
-                <td> <span class="badge badge-success">Alto Stock</span> </td>
-            {% endif %}
-            </tr>
         {% endfor %}
         </tbody>
     </table>

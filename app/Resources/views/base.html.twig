@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href=" {{ asset ( "favicon.ico" ) }} "/>
-        <title>{% block title %}| Bodega Los Mena - Control de Stock {% endblock %}</title>
+        <title>{% block title %}| BODEGA LOS MENA v1.0 - CONTROL DE STOCK {% endblock %}</title>
         {% stylesheets 'bundles/jmenaventas/css/*' filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
@@ -21,7 +21,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a id="titulo" class="brand" href=" {{ path ( '_home' ) }} ">Bodega Los Mena</a>
+                    <a id="titulo" class="brand" href=" {{ path ( '_home' ) }} ">BODEGA LOS MENA v1.0</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="{% block active_venta %} {% endblock %}"><a id="venta" href=" {{ path ( '_home' ) }} "><i class="icon-tags icon-white"></i> VENTA</a></li>

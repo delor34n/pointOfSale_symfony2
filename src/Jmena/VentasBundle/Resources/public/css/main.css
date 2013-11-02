@@ -2,74 +2,64 @@ body {
 	padding-top: 60px;
 	padding-bottom: 40px;
 }
-
+input {
+	text-transform: uppercase;
+}
 .new {
 	float: right;
 	margin-top: -54px;
 }
-
 .del {
 	margin-right: 130px;
 }
-
 #search {
 	width: 400px;
 	height: 34px;
 	margin-right: 10px;
 }
-
 #jmena_ventasbundle_productotype_valor {
 	width: 100px;
 }
-
 .detail-view th {
 	text-align: right;
 	width: 160px;
 }
-
 #total {
 	margin-right: 65px;
 	margin-top:15px;
 }
-
 .cantidad {
 	width: 50px;
 	text-align: center;
 }
-
 .descuento {
 	width: 30px;
 	height:15px !important;
 	text-align: center;
 }
-
 #dscto {
 	margin-left: 2px;
 }
-
 #vendedores{
 	float:right;
 	margin-top:-27px;
 	margin-right:35px;
 }
-
 #atendido{
 	float:right;
 	margin-right:165px;
 	margin-top:-10px;
 }
-
 h5 #atendido{
 	line-height:0px;
 }
-
 .ui-dialog .ui-dialog-buttonpane button {
 	margin: 0.5em 6.8em 0.5em 0;
 }
-
 .stockProducto {
 	display:inline;
 }
+
 /***************
 	COLORES
 ****************/
@@ -77,23 +67,31 @@ h5 #atendido{
 #titulo {
 	color: white;
 }
-
 #venta {
 	color: red;
 }
-
 #vendedor {
 	color: blue;
 }
-
 #stock {
 	color:yellow;
 }
-
 #inventario {
 	color: lightgreen;
 }
 #total {
 	margin-top:10px;
 	margin-bottom: -50px;
+}
+#paga {
+	width: 90px;
+}
+#line01{
+	margin-bottom:10px;
+}
+#line02{
+	margin-bottom: -5px;
+}
+#vuelto{
+	text-align: center;
 }

@@ -72,6 +72,7 @@ class DefaultController extends Controller
 
       $request = $this -> get( 'request' );
       $productos = $request -> request -> get( 'productos' );
+      $boleta = $request -> request -> get( 'resumen' );
 
       $em = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
 

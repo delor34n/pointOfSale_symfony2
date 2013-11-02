@@ -9,7 +9,9 @@ function precioInt ( price ) {
 
 $ ( document ).ready( function ( ) {
 
-  $( document ).on ( "change" ,  "input.descuento" , function() {
+  $(".descuento").on('input', function() {
+
+    $(this).val($(this).val().replace(/[^0-9]+/g, ''));
 
     var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
     var dscto = $( ".descuento" ).val ( );
@@ -142,7 +144,7 @@ $ ( document ).ready( function ( ) {
               $("#elementos_"+searchCode).append("<td id='precio'>$"+data.precio+"</td>");
               $("#elementos_"+searchCode).append("<td>"+cantidad+"</td>");
               $("#elementos_"+searchCode).append("<td id='subtotal'>$"+data.precio+"</td>");
-              $("#elementos_"+searchCode).append("<td></td>");
+              $("#elementos_"+searchCode).append("<td id='"+searchCode+"'class='rowDelete'><i class='icon-remove'></i></td>");
               $("#elementos_"+searchCode).append(stock);
               $("#elementos_"+searchCode).append(oldCantidad);
 
@@ -192,7 +194,21 @@ $ ( document ).ready( function ( ) {
 
           } else if ( data.responseCode == 400 ) { //Error 400: producto no existe
 
-            alert( "Producto no existe!" );
+            $( function() {
+              $( "#dialog-prodE" ).dialog({
+                resizable: false,
+                draggable: false,
+                width:290,
+                modal: true,
+                buttons: {
+                  Cerrar: function() {
+
+                    $( this ).dialog( "close" );
+
+                  }
+                }
+              });
+            });
 
           } else { //el siguiente código se ejecutará cuando se realice una búsqueda por el nombre, marca, descripción del producto
 
@@ -242,6 +258,13 @@ $ ( document ).ready( function ( ) {
             $(document).unbind("click");
 
             //Esto se ejecutará al hacer click en el resultado de la búsqueda
+            $( document ).on ( "click" ,  ".rowDelete" , function() {
+
+              $("#elementos_"+$(this).attr('id')).remove();
+
+            });
+
+            //Esto se ejecutará al hacer click en el resultado de la búsqueda
             $( document ).on ( "click" ,  "#elements > tr" , function() {
 
               //obtenemos la fila "clickeada"
@@ -271,7 +294,7 @@ $ ( document ).ready( function ( ) {
                 $("#elementos_"+codigo).append("<td id='precio'>"+precio+"</td>");
                 $("#elementos_"+codigo).append("<td>"+cantidad+"</td>");
                 $("#elementos_"+codigo).append("<td id='subtotal'>"+precio+"</td>");
-                $("#elementos_"+codigo).append("<td></td>");
+                $("#elementos_"+codigo).append("<td id='"+codigo+"'class='rowDelete'><i class='icon-remove'></i></td>");
                 $("#elementos_"+codigo).append(stock);
                 $("#elementos_"+codigo).append(oldCantidad);
 
@@ -424,50 +447,130 @@ $ ( document ).ready( function ( ) {
 
       //Creamos un objeto Json
       productosJson = [];
+      resumen = [];
+
+      key = {};
+
+      key["vendedor"] = $("#vendedores").text().replace(/(\r\n|\n|\r)/gm,"").replace(/\s+/g," ").replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+      resumen.push ( key );
 
       //Iteramos sobre cada uno de los elementos de la tabla
       $('#elementos > tr').each(function() {
 
         //Creamos un array
         item = {};
+        key = {};
+
+        key["descripcion"] = $(this).find("#codigo").next().next().next().text();
+        key["precio"] = $(this).find("#codigo").next().next().next().next().text();
 
         //Almacenamos el código del producto
         item["productCode"] = $(this).find("#codigo").text();
+        
+        key["cantidad"] = $(this).find("#cantidad_"+item["productCode"]).val();
+        
         //Y calculamos su nuevo stock
         item["newStock"] = $(this).find(".stock").val() - $(this).find(".cantidad").val();
 
         //Agregamos el nuevo elemento al objeto Json
         productosJson.push(item);
 
+        resumen.push ( key );
+
       });
+
+      key = {};
+
+      key [ "subtotal" ] = $("#SUBTOTAL").text();
+      key [ "descuento" ] = $(".descuento").val();
+      key [ "total" ] = $("#TOTAL").text();
+
+      resumen.push ( key );
 
       var url = $( "#vender" ).attr( "action" );
 
       $.post( url , {
 
-          productos: productosJson
+          productos: productosJson,
+          resumen: resumen
 
         }, function ( data ) {
 
           if ( data.responseCode == 200 ) {
 
-            //Significa que podemos imprimir el vale...
-            
-
+            //Significa que ya imprimos el vale...
             //Recargamos la página para poder realizar una nueva venta...
-            location.reload ( );
-
+            $(function() {
+              $( "#dialog-vuelto" ).dialog({
+                resizable: false,
+                draggable: false,
+                width:300,
+                modal: true,
+                buttons: {
+                  Aceptar: function() {
+                    $( this ).dialog( "close" );
+                    $(".descuento").val(0);
+                    window.location.reload()
+                  }
+                }
+              });
+            });
           }
 
       });
 
     } else { //cuando no hay ...
 
-        alert ( "¡Debe agregar productos para vender!");
+        $( function() {
+          $( "#dialog-venderE" ).dialog({
+            resizable: false,
+            draggable: false,
+            width:340,
+            modal: true,
+            buttons: {
+              Cerrar: function() {
+
+                $( this ).dialog( "close" );
+
+              }
+            }
+          });
+        });
 
     }
 
     return false;
+
+  });
+
+  /*
+    En esta parte eliminamos el producto en la venta
+  */
+
+  //Esto se ejecutará al hacer click en el resultado de la búsqueda
+  $( document ).on ( "click" ,  ".rowDelete" , function() {
+
+    $("#elementos_"+$(this).attr('id')).remove();
+
+  });
+
+  $('#paga').on('input', function() {
+    
+    // do something
+    $(this).val($(this).val().replace(/[^0-9]+/g, ''));
+
+    var total = precioInt($("#TOTAL").text());
+    num = $(this).val();
+
+    if ( num - total > 0 ) {
+
+      $("#vuelto").text(num-total);
+
+    } else {
+
+      $("#vuelto").text(0);
+
+    }
 
   });
 
