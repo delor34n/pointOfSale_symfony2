@@ -17,8 +17,7 @@ class ProductoType extends AbstractType
             ->add('alarma', null , array ( 'label' => 'Alarma' ) )
             ->add('valor', null , array ( 'label' => 'Valor' ) )
             ->add('categoria', null , array ( 'label' => 'Categoria' ) )
-            ->add('marca', null , array ( 'label' => 'Marca' ) )
-        ;
+            ->add('marca', null , array ( 'label' => 'Marca' ) );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

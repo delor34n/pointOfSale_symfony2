@@ -264,23 +264,6 @@ $ ( document ).ready( function ( ) {
             //Esto se ejecutará al hacer click en el resultado de la búsqueda
             $( document ).on ( "click" ,  ".rowDelete" , function() {
 
-              var producto = $("#elementos_"+$(this).attr('id'));
-
-              var precio = precioInt ( producto.find( "#subtotal" ).text());
-              //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
-              //******************************************
-
-              var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
-
-              total = total - precio;
-              $( "#SUBTOTAL" ).text ( "$ " + total );
-
-              var dscto = $( ".descuento" ).val ( );
-
-              total = total - ( (dscto/100) * total );
-
-              $( "#TOTAL" ).text ( "$ " + total );
-
               $("#elementos_"+$(this).attr('id')).remove();
 
             });
@@ -570,23 +553,6 @@ $ ( document ).ready( function ( ) {
 
   //Esto se ejecutará al hacer click en el resultado de la búsqueda
   $( document ).on ( "click" ,  ".rowDelete" , function() {
-
-    var producto = $("#elementos_"+$(this).attr('id'));
-
-    var precio = precioInt ( producto.find( "#subtotal" ).text());
-    //hasta aquí todo bien: ingresa uno nuevo y lo agrega al subtotal del producto
-    //******************************************
-
-    var total = precioInt ( $( "#SUBTOTAL" ).text( ) );
-
-    total = total - precio;
-    $( "#SUBTOTAL" ).text ( "$ " + total );
-
-    var dscto = $( ".descuento" ).val ( );
-
-    total = total - ( (dscto/100) * total );
-
-    $( "#TOTAL" ).text ( "$ " + total );
 
     $("#elementos_"+$(this).attr('id')).remove();
 

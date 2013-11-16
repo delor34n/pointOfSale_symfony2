@@ -74,6 +74,30 @@ class DefaultController extends Controller
       $productos = $request -> request -> get( 'productos' );
       $boleta = $request -> request -> get( 'resumen' );
 
+      $cantidad = count($boleta)-2;
+
+      $fp = fopen( $_SERVER['DOCUMENT_ROOT']."/fichas/data.txt" ,"wb");
+
+      fwrite ( $fp , $boleta[0]["vendedor"]."\n" );
+
+      for ( $i = 1; $i <= $cantidad ; $i++ ){
+
+        fwrite ( $fp , $boleta[$i]["descripcion"]."\t" );
+        fwrite ( $fp , $boleta[$i]["precio"]."\t" );
+        fwrite ( $fp , $boleta[$i]["cantidad"]."\n" );
+
+      }
+
+      fwrite ( $fp , $boleta[$cantidad+1]["subtotal"]."\n" );
+      fwrite ( $fp , $boleta[$cantidad+1]["descuento"]."\n" );
+      fwrite ( $fp , $boleta[$cantidad+1]["total"]."\n" );
+
+      fclose ( $fp );
+
+      //Ejecutamos el archivo para imprimir y luego borramos el archivo
+      //shell_exec("./exe < data.txt");
+      //shell_exec("del data.txt");
+
       $em = $this -> getDoctrine( ) -> getRepository ( 'JmenaVentasBundle:Producto' );
 
       for ( $i = 0 ; $i < count($productos) ; $i++ ) {
